@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Path game</title>
+  </head>
+  <body>
+    <div id="TelaInicial" class="tela">
+      <div id="btnStart" class="btnGlobal" onclick="mudarTela('TelaSelect')">START</div>
+    </div>
+    
+    <div id="TelaSelect" class="tela oculto">
+      <div id="iconCharacters" class="">
+				<div id="seleçãoP1" class="SeleçãoIcone">1</div>
+				<div id="seleçãoP2" class="SeleçãoIcone">2</div>
+				<div id="seleçãoP4" class="SeleçãoIcone">3</div>
+				<div id="seleçãoP4" class="SeleçãoIcone">4</div>
+			</div>
+      <div id="btnProx" class="btnsPA" onclick="SelecaoDePeraonagem('avancar')">></div>
+      <div id="btnAnter" class="btnsPA" onclick="SelecaoDePeraonagem('voltar')"><</div>
+      <div id="iconPerso" class="">1</div>
+      <div id="botaoSelect" class="btnGlobal" onclick="mudarTela('TelaSkillsEPassivas')">ESCOLHER</div>
+    </div>
+
+		<div id="TelaSkillsEPassivas" class="tela oculto">
+			<div id="BoxPassivasTitle" class="Boxes">HABILIDADES INICIAIS</div>
+			<div id="BoxPassivas" class="">
+				<div id="Passiva1" class="PassivasP"></div>
+				<div id="Passiva2" class="PassivasP"></div>
+				<div id="Passiva3" class="PassivasP"></div>
+			</div>
+			
+			<div id="BoxBaralhoTitle" class="Boxes">CARTAS INICIAIS</div>
+			<div id="BoxBaralho" class="Boxes">
+				<div id="PriCarta" class="Cards"></div>
+				<div id="SegCarta" class="Cards"></div>
+				<div id="TriCarta" class="Cards"></div>
+				<div id="QuarCarta" class="Cards"></div>
+				<div id="QuinCarta" class="Cards"></div>
+				<div id="SextCarta" class="Cards"></div>
+				<div id="SetimaCarta" class="Cards"></div>
+				<div id="OitCarta" class="Cards"></div>
+				<div id="NonaCarta" class="Cards"></div>
+			</div>
+			
+			<div id="BoxBotoes">
+				<div id="btnPersonagens" class="btnGlobal" onclick="mudarTela('TelaSelect')">< PERSONAGENS</div>
+				<div id="btnGame" class="btnGlobal" onclick="mudarTela('TelaPrincipal')">COMEÇAR ></div>
+			</div>
+			
+			<div id="PopUpskillaCards">
+				<div id="PopUpSC">
+					<div id="" class=""></div>
+				</div>
+			</div>
+		</div>
+
+		<div id="TelaPrincipal" class="tela oculto">
+			MENU DO GAME
+		</div>
+  </body>
+  <script type="module" src="/src/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+</html>
