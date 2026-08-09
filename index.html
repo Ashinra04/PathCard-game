@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Card Path game</title>
+		<link rel="manifest" href="/manifest.json">
   </head>
   <body>
     <div id="TelaInicial" class="tela">
@@ -26,9 +27,9 @@
 		<div id="TelaSkillsEPassivas" class="tela oculto">
 			<div id="BoxPassivasTitle" class="Boxes">HABILIDADES INICIAIS</div>
 			<div id="BoxPassivas" class="">
-				<div id="Passiva1" class="PassivasP"></div>
-				<div id="Passiva2" class="PassivasP"></div>
-				<div id="Passiva3" class="PassivasP"></div>
+				<div data-id="Passiva1" class="PassivasP"></div>
+				<div data-id="Passiva2" class="PassivasP"></div>
+				<div data-id="Passiva3" class="PassivasP"></div>
 			</div>
 			
 			<div id="BoxBaralhoTitle" class="Boxes">CARTAS INICIAIS</div>
@@ -49,9 +50,10 @@
 				<div id="btnGame" class="btnGlobal" onclick="mudarTela('TelaPrincipal')">COMEÇAR ></div>
 			</div>
 			
-			<div id="PopUpskillaCards">
+			<div id="PopUpskillaCards" onclick="DesativarPopUp()">
 				<div id="PopUpSC">
-					<div id="" class=""></div>
+					<div id="linhaSprites" class=""></div>
+					<div id="linhaInfos" class=""></div>
 				</div>
 			</div>
 		</div>

@@ -23,6 +23,7 @@ window.mudarTela = function (idParaMostrar) {
       console.error("A tela " + idParaMostrar + " não foi encontrada!");
     }
 };
+
 window.PersonagemIndex = 1;
 window.SelecaoDePeraonagem = function(botao) {
 	let Personagem = document.getElementById('iconPerso');
@@ -46,4 +47,36 @@ window.SelecaoDePeraonagem = function(botao) {
 			PersonagemIndex = 4;
 		}
 	}
+}
+
+window.DesativarPopUp = function(){
+	let PopUp = document.getElementById('PopUpskillaCards');
+	PopUp.classList.add('oculto');
+}
+
+function AtivarPopUp(botaoClicado) {
+	let PopUp = document.getElementById('PopUpskillaCards');
+	PopUp.classList.remove('oculto');
+	}
+
+	const containerPai = document.getElementById('BoxBaralho');
+
+if (containerPai) {
+  containerPai.addEventListener('click', function(event) {
+
+    const botao = event.target.closest('.Cards');
+
+    if (botao) {
+      AtivarPopUp(botao);
+    }
+  });
+}
+
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => console.log('Service Worker registrado com sucesso!'))
+      .catch(error => console.log('Falha ao registrar o Service Worker:', error));
+  });
 }
