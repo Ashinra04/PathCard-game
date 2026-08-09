@@ -29,6 +29,7 @@ jobs:
 
     - name: Sincronizar Capacitor e Gerar APK
       run: |
+        npm install @capacitor/android
         npx cap add android
         npx cap sync android
         cd android
