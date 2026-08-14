@@ -1,0 +1,1 @@
+let EscolhaP, EscolhaBot;
