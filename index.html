@@ -64,18 +64,38 @@
 			 <div id="btn2" class="btnBar">Andar: 99</div>
 			 <div id="btn3" class="btnBar">Gold: 1000</div>
 			</div>
-			<div id="fundoImg"></div>
+			<div id="fundoImg" class="imagemStyle"></div>
 			<div id="Hotbar" class="">
 			 <div id="btn1" class="btnBar">perfil</div>
 			 <div id="btn2" class="btnBar">Cartas</div>
-			 <div id="btn3" class="btnBar">Batalhar</div>
+			 <div id="btn3" class="btnBar" onclick="mudarTela('TelaBatalha')">Batalhar</div>
 			 <div id="btn4" class="btnBar">Lojas</div>
 		 </div>
 		</div>
 		
 		<div id="TelaBatalha" class="tela oculto">
-
-		</div>
+			<div id="RowInimigo" class=""></div>
+			<div id="RowTabuleiro" class="">
+				<div id="PosicoesEnemy" class="">
+					<div id="PosicaoT1" class="PosiçõesT"></div>
+					<div id="PosicaoT2" class="PosiçõesT"></div>
+					<div id="PosicaoT3" class="PosiçõesT"></div>
+					<div id="PosicaoT4" class="PosiçõesT"></div>
+					<div id="PosicaoT5" class="PosiçõesT"></div>
+					<div id="PosicaoT6" class="PosiçõesT"></div>
+				</div>
+				<div id="Bar">
+				<div id="PosicoesAliado" class="">
+					<div id="PosicaoT7" class="PosiçõesT"></div>
+					<div id="PosicaoT8" class="PosiçõesT"></div>
+					<div id="PosicaoT9" class="PosiçõesT"></div>
+					<div id="PosicaoT10" class="PosiçõesT"></div>
+					<div id="PosicaoT11" class="PosiçõesT"></div>
+					<div id="PosicaoT12" class="PosiçõesT"></div>
+				</div>
+			</div>
+			<div id="RowPlayer" class=""></div>
+		</>
   </body>
   <script type="module" src="/src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>

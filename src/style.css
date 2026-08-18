@@ -19,6 +19,12 @@ html {
   padding: 0;
   box-sizing: border-box;
 }
+.imagemStyle {
+	background-position: center;
+  background-repeat: no-repeat;
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
+}
 /*----------------------------------------
 TELA INICIAL MENU
 -------------------------------------------*/
@@ -166,8 +172,14 @@ TELA SKILLS E CARTAS
 }
 .Cards {
 	height: 100%; width: 100%;
-	border: 1.5px solid green;
-  background-color: hwb(209 11% 40%);
+	/*border: 1.5px solid green;
+  background-color: hwb(0 100% 0%);*/
+	background-image: url('/Imagens/Cards.png');
+	background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
 }
 
 #BoxBotoes {
@@ -234,13 +246,8 @@ TELA PRINCIPAL
 #fundoImg {
 	width: 100%; height: 100%;
 	grid-row: 2;
-	/*background-image: url('/Imagens/Floor_principal.jpg');*/
 	background-image: url('/Imagens/Floor.png');
-	background-position: center;
-  background-repeat: no-repeat;
   background-size: contain;
-  image-rendering: pixelated; 
-  image-rendering: crisp-edges;
 }
 
 #Hotbar {
@@ -261,4 +268,92 @@ TELA PRINCIPAL
 }
 .btnBar:last-child {
   border-right: none;
+}
+/*----------------------------------------
+TELA BATALHA
+-------------------------------------------*/
+#TelaBatalha {
+	width: 100%; height: 100%;
+  background-color: #000000;
+	display: grid;
+	grid-template-rows: 20% 60% 20%;
+}
+#RowInimigo{
+	width: 100%; height: 100%;
+	grid-row: 1;
+  background-color: #792d2d;
+}
+#RowTabuleiro{
+	width: 100%; height: 100%;
+	grid-row: 2;
+  background-color: #6882e0;
+	gap: 1%; padding: 1%;
+	grid-template-rows: 45% 10% 45%;
+}
+#RowPlayer{
+	width: 100%; height: 100%;
+	grid-row: 3;
+  background-color: #fcc5c5;
+}
+.PosiçõesT {
+	width: 50%; height: 100%;
+  background-color: #d06c6c;
+	border: 2px solid black;
+}
+#PosicoesEnemy {
+	width: 100%; height: 100%;
+  background-color: #d06c6c;
+	grid-row: 1;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+#PosicaoT1{
+	grid-row: 1; grid-column: 1;
+}
+#PosicaoT2{
+	grid-row: 1; grid-column: 2;
+}
+#PosicaoT3{
+	grid-row: 1; grid-column: 3;
+}
+#PosicaoT4{
+	grid-row: 2; grid-column: 1;
+}
+#PosicaoT5{
+	grid-row: 2; grid-column: 2;
+}
+#PosicaoT6{
+	grid-row: 2; grid-column: 3;
+}
+
+#Bar {
+	width: 100%; height: 100%;
+	grid-row: 2;
+}
+
+#PosicoesAliado {
+	width: 100%; height: 100%;
+	grid-row: 3;
+  background-color: #d06c6c;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+}
+#PosicaoT7{
+	grid-row: 1; grid-column: 1;
+}
+#PosicaoT8{
+	grid-row: 1; grid-column: 2;
+}
+#PosicaoT9{
+	grid-row: 1; grid-column: 3;
+}
+
+#PosicaoT10{
+	grid-row: 2; grid-column: 1;
+}
+#PosicaoT11{
+	grid-row: 2; grid-column: 2;
+}
+#PosicaoT12{
+	grid-row: 2; grid-column: 3;
 }
