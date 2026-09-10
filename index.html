@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Card Path game</title>
 		<link rel="manifest" href="/manifest.json">
   </head>
@@ -10,19 +10,26 @@
     <div id="TelaInicial" class="tela">
       <div id="btnStart" class="btnGlobal" onclick="mudarTela('TelaSelect')">START</div>
     </div>
-    
+
     <div id="TelaSelect" class="tela oculto">
       <div id="iconCharacters" class="">
-				<div id="seleçãoP1" class="SeleçãoIcone">1</div>
-				<div id="seleçãoP2" class="SeleçãoIcone">2</div>
-				<div id="seleçãoP4" class="SeleçãoIcone">3</div>
-				<div id="seleçãoP4" class="SeleçãoIcone">4</div>
+				<div id="seleçãoP1" class="SeleçãoIcone"></div>
+				<div id="seleçãoP2" class="SeleçãoIcone"></div>
+				<div id="seleçãoP3" class="SeleçãoIcone"></div>
+				<div id="seleçãoP4" class="SeleçãoIcone"></div>
 			</div>
-      <div id="btnProx" class="btnsPA" onclick="SelecaoDePeraonagem('avancar')">></div>
-      <div id="btnAnter" class="btnsPA" onclick="SelecaoDePeraonagem('voltar')"><</div>
-      <div id="iconPerso" class="">1</div>
-      <div id="botaoSelect" class="btnGlobal" onclick="mudarTela('TelaSkillsEPassivas')">ESCOLHER</div>
-    </div>
+			
+			<div id="BoxPersonagem">
+				<div id="btnProx" class="" onclick="SelecaoPerso('avancar')">></div>
+				
+				<div id="ColumnCentral">
+					<div id="iconPerso" class="">1</div>
+      		<div id="botaoSelect" class="btnGlobal" onclick="mudarTela('TelaSkillsEPassivas')">ESCOLHER</div>
+				</div>
+				
+				<div id="btnAnter" class="" onclick="SelecaoPerso('voltar')"><</div>
+			</div>
+		</div>
 
 		<div id="TelaSkillsEPassivas" class="tela oculto">
 			<div id="BoxPassivasTitle" class="Boxes">HABILIDADES INICIAIS</div>
@@ -40,9 +47,9 @@
 				<div id="QuarCarta" class="Cards"></div>
 				<div id="QuinCarta" class="Cards"></div>
 				<div id="SextCarta" class="Cards"></div>
-				<div id="SetimaCarta" class="Cards"></div>
-				<div id="OitCarta" class="Cards"></div>
-				<div id="NonaCarta" class="Cards"></div>
+				<div id="QuarCarta" class="Cards"></div>
+				<div id="QuinCarta" class="Cards"></div>
+				<div id="SextCarta" class="Cards"></div>
 			</div>
 			
 			<div id="BoxBotoes">
@@ -72,30 +79,59 @@
 			 <div id="btn4" class="btnBar">Lojas</div>
 		 </div>
 		</div>
-		
+
 		<div id="TelaBatalha" class="tela oculto">
-			<div id="RowInimigo" class=""></div>
-			<div id="RowTabuleiro" class="">
-				<div id="PosicoesEnemy" class="">
-					<div id="PosicaoT1" class="PosiçõesT"></div>
-					<div id="PosicaoT2" class="PosiçõesT"></div>
-					<div id="PosicaoT3" class="PosiçõesT"></div>
-					<div id="PosicaoT4" class="PosiçõesT"></div>
-					<div id="PosicaoT5" class="PosiçõesT"></div>
-					<div id="PosicaoT6" class="PosiçõesT"></div>
+			<div id="rowInfos" class=""></div>
+		  <div id="RowInimigo" class="">
+				<div id="BoxPerfilBot" class="">
+					<div id="IconBoxBot" class="imagemStyle"></div>
+					<div id="barHPBot" class="">HP: 100/100</div>
 				</div>
-				<div id="Bar">
-				<div id="PosicoesAliado" class="">
-					<div id="PosicaoT7" class="PosiçõesT"></div>
-					<div id="PosicaoT8" class="PosiçõesT"></div>
-					<div id="PosicaoT9" class="PosiçõesT"></div>
-					<div id="PosicaoT10" class="PosiçõesT"></div>
-					<div id="PosicaoT11" class="PosiçõesT"></div>
-					<div id="PosicaoT12" class="PosiçõesT"></div>
+
+				<div id="BoxCartasBot" class="">
+					
 				</div>
 			</div>
-			<div id="RowPlayer" class=""></div>
-		</>
+
+		  <div id="RowTabuleiro" class="">
+		    <!-- Grid do Inimigo (Linha 1) -->
+		    <div id="PosicoesEnemy" class="">
+		      <div id="PosicaoT1" class="PosiçõesT SCardsBot"></div>
+		      <div id="PosicaoT2" class="PosiçõesT SCardsBot"></div>
+		      <div id="PosicaoT3" class="PosiçõesT SCardsBot"></div>
+		      <div id="PosicaoT4" class="PosiçõesT SCardsBot"></div>
+		      <div id="PosicaoT5" class="PosiçõesT SCardsBot"></div>
+		      <div id="PosicaoT6" class="PosiçõesT SCardsBot"></div>
+		    </div>
+
+		    <!-- Barra Divisória (Linha 2) -->
+		    <div id="Bar"></div>
+
+		    <!-- Grid do Aliado (Linha 3) -->
+		    <div id="PosicoesAliado" class="">
+		      <div id="PosicaoT7" class="PosiçõesT SCardsP"></div>
+		      <div id="PosicaoT8" class="PosiçõesT SCardsP"></div>
+		      <div id="PosicaoT9" class="PosiçõesT SCardsP"></div>
+		      <div id="PosicaoT10" class="PosiçõesT SCardsP"></div>
+		      <div id="PosicaoT11" class="PosiçõesT SCardsP"></div>
+		      <div id="PosicaoT12" class="PosiçõesT SCardsP"></div>
+		    </div>
+		  </div>
+
+		  <div id="RowPlayer" class="">
+				<div id="SlotC1" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC1')"></div>
+				<div id="SlotC2" class="CardsSlots imagemStyle"onclick="CardSelecionado('SlotC2')"></div>
+				<div id="SlotC3" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC3')"></div>
+				<div id="SlotC4" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC4')"></div>					
+			</div>
+			
+			<div id="rowBotoes" class="">
+					<div id="BotaoBar1" class="RowBottuns"></div>
+					<div id="BotaoBar2" class="RowBottuns"></div>
+					<div id="BotaoBar3" class="RowBottuns"></div>
+					<div id="BotaoBar4" class="RowBottuns"></div>
+			</div>
+		</div>
   </body>
   <script type="module" src="/src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>

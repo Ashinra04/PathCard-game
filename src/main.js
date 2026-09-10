@@ -1,8 +1,8 @@
 import './style.css';
+import './Combate/Combate.css';
+import './Combate/Combate.js';
 
 /* Imports das Telas Específicas
-import './telas/loja/loja.css';
-import './telas/loja/loja.js';
 import lojaHtml from './telas/loja/loja.html?raw';
 
 const cl = document.getElementById('container-loja');
@@ -25,7 +25,7 @@ window.mudarTela = function (idParaMostrar) {
 };
 
 window.PersonagemIndex = 1;
-window.SelecaoDePeraonagem = function(botao) {
+window.SelecaoPerso = function(botao) {
 	let Personagem = document.getElementById('iconPerso');
 	if(botao === 'avancar') {
 		if(PersonagemIndex < 4) {

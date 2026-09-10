@@ -25,6 +25,29 @@ html {
   image-rendering: pixelated; 
   image-rendering: crisp-edges;
 }
+
+/*
+html {
+  font-size: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 150%;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 200%;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+}
+*/
+
 /*----------------------------------------
 TELA INICIAL MENU
 -------------------------------------------*/
@@ -52,14 +75,11 @@ TELA INICIAL MENU
 TELA SELECAO DE PERSONAGEM
 -------------------------------------------*/
 #TelaSelect {
-  width: 100%;
-  height: 100%;
-  background-color: white;
+  width: 100%; height: 100%;
+  background-color: hwb(138 13% 39%);
+  padding: 1%; gap: 1%;
   display: grid;
-  padding: 1%;
-  grid-template-columns: repeat(6, 1fr); 
-  grid-template-rows: repeat(5, 1fr);
-  gap: 15px;
+  grid-template-rows: 15% 85%;
   overflow: hidden;
 	flex-direction: bottom;
 }
@@ -81,43 +101,75 @@ TELA SELECAO DE PERSONAGEM
 	display: grid;
   align-self: center;
 	grid-template-columns: repeat(4, 1fr);
-  grid-column: 1 / 7;
   grid-row: 1;
-	gap: 1%;
 }
 .SeleçãoIcone {
 	width: 100%; height: 100%;
-  background-color: #000000;
-	border: 1.5px solid green;
+  background-color: #f1db26;
+	border: 2px solid black;
+	background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
+}
+#seleçãoP1 {
+	background-image: url('/Imagens/SwordClass.png');
+}
+#seleçãoP2 {
+	background-image: url('/Imagens/StaffClass.png');
+}
+#seleçãoP3 {
+	background-image: url('/Imagens/BowClass.png');
+}
+#seleçãoP4 {
+	background-image: url('/Imagens/DaggerClass.png');
+}
+/* -----------------------------+----------------------+++++++*/
+#BoxPersonagem {
+	height: 100%;
+  background-color: gray;
+	display: grid;
+	grid-template-columns: 10% 80% 10%;
+  grid-row: 2;
 }
 
+#btnAnter, #btnProx {
+	height: 100%;
+	border: 1.5px solid green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
 #btnAnter {
   grid-column: 1;
-  grid-row: 2 / 6;
 }
-
 #btnProx {
-  grid-column: 6;
-  grid-row: 2 / 6;
+  grid-column: 3;
 }
 
+#ColumnCentral {
+	height: 100%;
+  background-color: gray;
+	display: grid;
+	grid-template-rows: 80% 20%;
+  align-self: center;
+  grid-column: 2;
+}
 #iconPerso {
 	height: 100%;
   border: 1.5px solid green;
   background-color: gray;
-  grid-row: 2/5;
-	grid-column: 2/6;
-	gap: 1%;
+  grid-row: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
 }
-
 #botaoSelect {
-  grid-column: 2 / 6;
-  grid-row: 5;
-  height: 60%;
+  grid-row: 2;
+  height: 100%;
 }
 
 /*----------------------------------------
@@ -127,7 +179,7 @@ TELA SKILLS E CARTAS
   width: 100%; height: 100%;
   background-color: #000000;
   display: grid;
-  grid-template-rows: 5% 20% 5% 63% 7%;
+  grid-template-rows: 5% 21% 5% 62% 7%;
 }
 
 #BoxPassivas {
@@ -141,12 +193,12 @@ TELA SKILLS E CARTAS
 }
 .PassivasP {
 	height: 100%; width: 100%;
-	border: 1.5px solid green;
   background-color: hwb(206 36% 11% / 0.4235294117647059);
 }
 
 .Boxes {
 	height: 100%; width: 100%;
+  font-size: clamp(16px, 4dvmax, 32px);
   background-color: hwb(0 31% 67%);
 	display: flex;
 	justify-content: center;
@@ -172,14 +224,8 @@ TELA SKILLS E CARTAS
 }
 .Cards {
 	height: 100%; width: 100%;
-	/*border: 1.5px solid green;
-  background-color: hwb(0 100% 0%);*/
-	background-image: url('/Imagens/Cards.png');
-	background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  image-rendering: pixelated; 
-  image-rendering: crisp-edges;
+  background-color: hwb(0 100% 0%);
+	
 }
 
 #BoxBotoes {
@@ -229,7 +275,7 @@ TELA PRINCIPAL
 -------------------------------------------*/
 #TelaPrincipal {
   width: 100%; height: 100%;
-  background-color: #000000;
+  background-color: #646464FF;
   display: grid;
 	grid-template-rows: 5% 85% 10%;
 }
@@ -268,92 +314,4 @@ TELA PRINCIPAL
 }
 .btnBar:last-child {
   border-right: none;
-}
-/*----------------------------------------
-TELA BATALHA
--------------------------------------------*/
-#TelaBatalha {
-	width: 100%; height: 100%;
-  background-color: #000000;
-	display: grid;
-	grid-template-rows: 20% 60% 20%;
-}
-#RowInimigo{
-	width: 100%; height: 100%;
-	grid-row: 1;
-  background-color: #792d2d;
-}
-#RowTabuleiro{
-	width: 100%; height: 100%;
-	grid-row: 2;
-  background-color: #6882e0;
-	gap: 1%; padding: 1%;
-	grid-template-rows: 45% 10% 45%;
-}
-#RowPlayer{
-	width: 100%; height: 100%;
-	grid-row: 3;
-  background-color: #fcc5c5;
-}
-.PosiçõesT {
-	width: 50%; height: 100%;
-  background-color: #d06c6c;
-	border: 2px solid black;
-}
-#PosicoesEnemy {
-	width: 100%; height: 100%;
-  background-color: #d06c6c;
-	grid-row: 1;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-}
-#PosicaoT1{
-	grid-row: 1; grid-column: 1;
-}
-#PosicaoT2{
-	grid-row: 1; grid-column: 2;
-}
-#PosicaoT3{
-	grid-row: 1; grid-column: 3;
-}
-#PosicaoT4{
-	grid-row: 2; grid-column: 1;
-}
-#PosicaoT5{
-	grid-row: 2; grid-column: 2;
-}
-#PosicaoT6{
-	grid-row: 2; grid-column: 3;
-}
-
-#Bar {
-	width: 100%; height: 100%;
-	grid-row: 2;
-}
-
-#PosicoesAliado {
-	width: 100%; height: 100%;
-	grid-row: 3;
-  background-color: #d06c6c;
-	grid-template-columns: repeat(3, 1fr);
-	grid-template-rows: repeat(2, 1fr);
-}
-#PosicaoT7{
-	grid-row: 1; grid-column: 1;
-}
-#PosicaoT8{
-	grid-row: 1; grid-column: 2;
-}
-#PosicaoT9{
-	grid-row: 1; grid-column: 3;
-}
-
-#PosicaoT10{
-	grid-row: 2; grid-column: 1;
-}
-#PosicaoT11{
-	grid-row: 2; grid-column: 2;
-}
-#PosicaoT12{
-	grid-row: 2; grid-column: 3;
 }
