@@ -2,11 +2,7 @@ import './style.css';
 import './Combate/Combate.css';
 import './Combate/Combate.js';
 
-/* Imports das Telas Específicas
-import lojaHtml from './telas/loja/loja.html?raw';
-
-const cl = document.getElementById('container-loja');
-if (cl) cl.outerHTML = lojaHtml; */
+let PersonagemIndex = 1;
 
 // ==========================================
 // NAVEGAÇÃO E VALIDAÇÕES INICIAIS
@@ -24,9 +20,14 @@ window.mudarTela = function (idParaMostrar) {
     }
 };
 
-window.PersonagemIndex = 1;
 window.SelecaoPerso = function(botao) {
 	let Personagem = document.getElementById('iconPerso');
+	let BoxPersonagem = document.getElementById(`seleçãoP${PersonagemIndex}`);
+	const PersonagemSelecaoBoxes = document.querySelectorAll('.SeleçãoIcone');
+	
+	PersonagemSelecaoBoxes.forEach(Boxes =>       Boxes.classList.add('SeleçãoIcone'));
+	PersonagemSelecaoBoxes.forEach(Boxes =>       Boxes.classList.remove('SeleçãoIcone2'));
+	
 	if(botao === 'avancar') {
 		if(PersonagemIndex < 4) {
 			PersonagemIndex++;

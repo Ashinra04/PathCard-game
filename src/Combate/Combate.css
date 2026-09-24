@@ -5,16 +5,14 @@ TELA BATALHA
   width: 100%; height: 100%;
   background-color: #000000;
   display: grid;
-  grid-template-rows: 5% 15% 55% 18% 7%;
+  grid-template-rows: 15% 60% 10% 15%;
 }
-#rowInfos {
-	width: 100%; height: 100%;
-  grid-row: 1;
-  background-color: #792d2d;
-}
+/*=========================================
+ 		Parte do Perfil do inimigo
+==========================================*/
 #RowInimigo{
+  grid-row: 1;
   width: 100%; height: 100%;
-  grid-row: 2;
   background-color: #792d2d;
 	display: grid;
 	grid-template-columns: 35% 65%;
@@ -51,12 +49,14 @@ TELA BATALHA
 	background-color: #5a6177;
 }
 
-/* Parte do tabuleiro/meio da tela*/
+/*=========================================
+ 		Parte do tabuleiro/meio da tela
+==========================================*/
 #RowTabuleiro{
+  grid-row: 2;
   width: 100%; height: 100%;
-  grid-row: 3;
   display: grid;
-	padding: 3%;
+	padding: 1%;
   grid-template-rows: 49% 2% 49%;
 }
 #PosicoesEnemy {
@@ -84,16 +84,11 @@ TELA BATALHA
   width: 100%; height: 100%;
   background-color: #d06c6c;
   border: 2px solid hwb(59 54% 24%);
-	background-size: cover;
+	background-size: contain;
 	background-position: center;
   background-repeat: no-repeat;
   image-rendering: pixelated; 
-  image-rendering: crisp-edges;}
-.SCardsBot {
-	background-image: url('/Imagens/slots_enemy.png');
-}
-.SCardsP {
-	background-image: url('/Imagens/slots_player.png');
+  image-rendering: crisp-edges;
 }
 #PosicaoT1{ grid-row: 1; grid-column: 1; }
 #PosicaoT2{ grid-row: 1; grid-column: 2; }
@@ -101,45 +96,74 @@ TELA BATALHA
 #PosicaoT4{ grid-row: 2; grid-column: 1; }
 #PosicaoT5{ grid-row: 2; grid-column: 2; }
 #PosicaoT6{ grid-row: 2; grid-column: 3; }
-#PosicaoT7{ grid-row: 1; grid-column: 1; }
-#PosicaoT8{ grid-row: 1; grid-column: 2; }
-#PosicaoT9{ grid-row: 1; grid-column: 3; }
-#PosicaoT10{ grid-row: 2; grid-column: 1; }
-#PosicaoT11{ grid-row: 2; grid-column: 2; }
-#PosicaoT12{ grid-row: 2; grid-column: 3; }
 
+#PosicaoTP1{ grid-row: 1; grid-column: 1; }
+#PosicaoTP2{ grid-row: 1; grid-column: 2; }
+#PosicaoTP3{ grid-row: 1; grid-column: 3; }
+#PosicaoTP4{ grid-row: 2; grid-column: 1; }
+#PosicaoTP5{ grid-row: 2; grid-column: 2; }
+#PosicaoTP6{ grid-row: 2; grid-column: 3; }
+
+/*=========================================
+   ULTIMA ROW DA TELA A PARTE DAS CARTAS NA MAO 
+==========================================*/
 #RowPlayer{
-  width: 100%; height: 100%;
   grid-row: 4;
+  width: 100%; height: 100%;
   background-color: #5a6177;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	display: flex;
+	flex-direction: row;
 	gap: 1%; padding: 1%;
 }
 .CardsSlots {
 	width: 100%; height: 100%;
-	border: 2px solid black;
-	background-image: url('/Imagens/Cards.png');
-	background-size: cover;
+	background-size: contain;
 }
 
 .CardSelecionado {
-	transform: scale(1.05); 
-	border: 2px solid black;
-	background-image: url('/Imagens/Cards.png');
-	background-size: cover;
+	transform: scale(1.05);
+	background-size: contain;
 }
 
-#rowBotoes {
-	width: 100%; height: 100%;
-  grid-row: 5;
-	border-top: 2px solid hwb(0 9% 69%);
-  background-color: #4c74f2;
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	gap: 1%; padding: 1%;
+/*=========================================
+  BOX DAS INFOS EM GERAL 
+==========================================*/
+#BoxInfos {
+  grid-row: 3;
+  width: 100%; height: 100%;
+  display: grid;
+	align-items: end;
+  grid-template-columns: 17% 40% 25% 18%;
+  gap: 0.1%; padding: 1%;
+  background-color: #1a1a1a;
 }
-.RowBottuns {
-	width: 100%; height: 100%;
-	border: 1px solid black;
+.Xx {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: clamp(1.3rem, 3vw, 2rem);
+}
+#BoxEnergia {
+  width: 100%; height: 100%;
+  grid-column: 1;
+	border: 2px solid hwb(59 54% 24%);
+  border-radius: 20% 20% 0 0;
+	font-size: clamp(2rem, 3vw, 3rem);
+	background-color: #01a9d3;
+}
+#BoxTurno {
+  width: 100%; height: 80%;
+  grid-column: 2;
+	border: 2px solid hwb(59 54% 24%);
+}
+#BoxTime {
+  width: 100%; height: 80%;
+  grid-column: 3;
+	border: 2px solid hwb(59 54% 24%);
+}
+#BoxReinicarMao {
+	width: 100%; height: 80%;
+  grid-column: 4;
+	border: 2px solid hwb(59 54% 24%);
 }

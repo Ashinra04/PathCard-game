@@ -1,3 +1,10 @@
+body {
+  -webkit-user-select: none; 
+  -moz-user-select: none;
+  -ms-user-select: none;  
+  user-select: none;  
+  -webkit-tap-highlight-color: transparent;
+}
 body,
 html {
     margin: 0; padding: 0;
@@ -47,20 +54,24 @@ h1 {
   font-size: 2rem;
 }
 */
-
+#CORES {
+  background-color: hwb(0 0% 68%);
+  background-color: hwb(48 53% 15%);
+  background-color: hwb(234 0% 60%);
+}
 /*----------------------------------------
 TELA INICIAL MENU
 -------------------------------------------*/
 #TelaInicial {
   width: 100%; height: 100%;
-  background-color: #000000;
+  background-color: hwb(48 53% 15%);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .btnGlobal {
-	border: 1.5px solid green;
-	background-color: hwb(218 0% 40% / 0.4823529411764706);
+	border: 1px solid hwb(48 53% 15%);
+	background-color: hwb(218 0% 40% / 1);
 	display: flex;
   justify-content: center;
   align-items: center;
@@ -76,17 +87,21 @@ TELA SELECAO DE PERSONAGEM
 -------------------------------------------*/
 #TelaSelect {
   width: 100%; height: 100%;
-  background-color: hwb(138 13% 39%);
-  padding: 1%; gap: 1%;
   display: grid;
-  grid-template-rows: 15% 85%;
+  grid-template-rows: 6% 14% 20% 60%;
   overflow: hidden;
 	flex-direction: bottom;
+}
+#SelectTitle {
+	width: 100%; height: 100%;
+	grid-row: 1;
+  background-color: hwb(218 0% 40% / 1);
+	border: 1px solid hwb(48 53% 15%);
+	display: flex; align-items: center; justify-content: center;
 }
 
 .btnsPA {
   background-color: gray;
-  border: 1.5px solid green;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -97,16 +112,25 @@ TELA SELECAO DE PERSONAGEM
 
 #iconCharacters {
   height: 100%;
-  background-color: gray;
 	display: grid;
   align-self: center;
 	grid-template-columns: repeat(4, 1fr);
-  grid-row: 1;
+  grid-row: 2;
+	background-color: gray;
 }
 .SeleçãoIcone {
 	width: 100%; height: 100%;
-  background-color: #f1db26;
-	border: 2px solid black;
+	border: 1px solid black;
+	background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
+}
+.SeleçãoIcone2 {
+	width: 100%; height: 100%;
+	background-color: hwb(48 53% 15%);
+	border: 1px solid black;
 	background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
@@ -125,42 +149,57 @@ TELA SELECAO DE PERSONAGEM
 #seleçãoP4 {
 	background-image: url('/Imagens/DaggerClass.png');
 }
-/* -----------------------------+----------------------+++++++*/
+
+#TSpersoInfos {
+	width: 100%; height: 100%;
+	grid-row: 3;
+  background-color: hwb(218 0% 40% / 1);
+	border: 1px solid hwb(48 53% 15%);
+	display: flex; align-items: center; justify-content: center;
+}
+
 #BoxPersonagem {
+	width: 100%;
 	height: 100%;
-  background-color: gray;
+  background-color: white;
 	display: grid;
 	grid-template-columns: 10% 80% 10%;
-  grid-row: 2;
+	grid-template-rows: 100%;
+  grid-row: 4;
 }
 
 #btnAnter, #btnProx {
+	width: 100%;
 	height: 100%;
-	border: 1.5px solid green;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 20px;
+	grid-row: 1;
+	color: white;
+	background-color: hwb(0 0% 68%);
 }
 #btnAnter {
   grid-column: 1;
+	border-right: 1px solid lab(0% 0 0);
 }
 #btnProx {
   grid-column: 3;
+	border-left: 1px solid lab(0% 0 0);
 }
 
 #ColumnCentral {
 	height: 100%;
-  background-color: gray;
+	width: 100%;
 	display: grid;
-	grid-template-rows: 80% 20%;
+	grid-template-rows: 88% 12%;
   align-self: center;
   grid-column: 2;
+	grid-row: 1;
+	background-color: gray;
 }
 #iconPerso {
 	height: 100%;
-  border: 1.5px solid green;
-  background-color: gray;
   grid-row: 1;
 	display: flex;
 	justify-content: center;
@@ -225,7 +264,7 @@ TELA SKILLS E CARTAS
 .Cards {
 	height: 100%; width: 100%;
   background-color: hwb(0 100% 0%);
-	
+  background-size: contain;
 }
 
 #BoxBotoes {
