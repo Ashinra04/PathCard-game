@@ -4,17 +4,6 @@ let CartaAserExcluida;
 /*=========================================
          OBJETOS 
 ==========================================*/
-window.Deck = {
-	'1Carta': '/Imagens/Deck-Druida/BearCard.png',
-	'2Carta': '/Imagens/Deck-Druida/DragonCard.png',
-	'3Carta': '/Imagens/Deck-Druida/BearCard.png',
-	'4Carta': '/Imagens/Deck-Druida/DragonCard.png',
-	'5Carta': '/Imagens/Deck-Druida/BearCard.png',
-	'6Carta': '/Imagens/Deck-Druida/DragonCard.png',
-	'7Carta': '/Imagens/Deck-Druida/BearCard.png',
-	'8Carta': '/Imagens/Deck-Druida/DragonCard.png',
-	'9Carta': '/Imagens/Deck-Druida/DragonCard.png'
-};
 window.CentralImagens = {
 	'Urso': '/Imagens/CartasGlobais/UrsoBS.png',
 	'Dragao': '/Imagens/CartasGlobais/DragãoBS.png',
@@ -27,28 +16,26 @@ window.CentralImagensComFundo = {
 	'Lobo': '/Imagens/Deck-Druida/WolfCard.png',
 	'Morcego': '/Imagens/Deck-Druida/BatCard.png'
 }
+
 /*=========================================
          ARRAYS 
 ==========================================*/
+window.Deck = ['Urso', 'Dragao', 'Lobo', 'Morcego', 'Urso', 'Dragao', 'Lobo', 'Morcego', 'Urso', 'Dragao'];
 window.cartasEMaos = ['Urso', 'Dragao', 'Lobo', 'Morcego'];
-window.tabuleiroP = ['', '', '', '', '', '']
+window.tabuleiroP = ['', '', '', '', '', '', '', '', ''];
+window.tabuleiroPE = ['', '', '', '', '', '', '', '', ''];
 
 /*=========================================
          FUNÇÕES 
 ==========================================*/
 window.montarDeck = function() {
-	const DeckP = window.Deck;
-
 	for (let index = 1; index < 10; index++) {
 		const CPosicao = document.getElementById(`${index}Carta`);
-		const IndexImagem = window.Deck[`${index}Carta`];
+		const indexCarta = window.Deck[index];
+		const indexImagem = window.CentralImagensComFundo[indexCarta];
 		
-		CPosicao.style.backgroundImage = `url('${IndexImagem}')`;
+		CPosicao.style.backgroundImage = `url('${indexImagem}')`;
 	}
-	
-	/*DeckP.forEach(carta => {
-		const Position;
-	})*/
 }
 window.CicloCartas = function() {
   const MaoPlayer = document.getElementById("RowPlayer");
@@ -133,3 +120,22 @@ window.CardNoTabuleiro = function(CardPosition, Idslot) {
     console.log("Selecione uma carta primeiro");
   }
 };
+window.MontarDeckEnimigo = function() {
+	const numeroSorteados = [];
+	
+	while(numeroSorteados.length < 6) {
+		const NRandom = Math.floor(Math.random() * 4);
+		const ID = window.cartasEMaos[NRandom];
+		const ImgCaminho = window.CentralImagens[ID];
+		
+		const PRandom = Math.floor(Math.random() * 9) + 1;
+		if(!numeroSorteados.includes(PRandom)) {
+			numeroSorteados.push(PRandom);
+			const Pindex = PRandom - 1;
+			tabuleiroPE[Pindex] = ID;
+			const EnemyPosition = document.getElementById(`PosicaoT${PRandom}`);
+			EnemyPosition.style.backgroundImage = `url('${ImgCaminho}')`;
+		}
+	}
+	console.log(tabuleiroPE);
+}

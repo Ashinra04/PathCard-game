@@ -5,7 +5,7 @@ TELA BATALHA
   width: 100%; height: 100%;
   background-color: #000000;
   display: grid;
-  grid-template-rows: 15% 60% 10% 15%;
+  grid-template-rows: 12% 67% 6% 15%;
 }
 /*=========================================
  		Parte do Perfil do inimigo
@@ -61,11 +61,10 @@ TELA BATALHA
 }
 #PosicoesEnemy {
   width: 100%; height: 100%;
-  grid-row: 1;
-  display: grid; 
+  grid-row: 1; display: grid; 
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1.2%;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2%; padding-left: 2%; padding-right: 2%;
 }
 #Bar {
   width: 100%; height: 100%;
@@ -77,8 +76,9 @@ TELA BATALHA
   grid-row: 3;
   display: grid; 
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1%; }
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2%; padding-left: 2%; padding-right: 2%;
+}
 
 .PosiçõesT {
   width: 100%; height: 100%;

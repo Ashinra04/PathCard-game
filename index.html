@@ -75,7 +75,7 @@
 			<div id="Hotbar" class="">
 			 <div id="btn1" class="btnBar">perfil</div>
 			 <div id="btn2" class="btnBar">Cartas</div>
-			 <div id="btn3" class="btnBar" onclick="CicloCartas(); mudarTela('TelaBatalha')">Batalhar</div>
+			 <div id="btn3" class="btnBar" onclick="MontarDeckEnimigo(); CicloCartas(); mudarTela('TelaBatalha')">Batalhar</div>
 			 <div id="btn4" class="btnBar">Lojas</div>
 		 </div>
 		</div>
@@ -102,6 +102,9 @@
 		      <div id="PosicaoT4" class="PosiçõesT"></div>
 		      <div id="PosicaoT5" class="PosiçõesT"></div>
 		      <div id="PosicaoT6" class="PosiçõesT"></div>
+		      <div id="PosicaoT7" class="PosiçõesT"></div>
+		      <div id="PosicaoT8" class="PosiçõesT"></div>
+		      <div id="PosicaoT9" class="PosiçõesT"></div>
 		    </div>
 
 		    <!-- Barra Divisória (Linha 2) -->
@@ -115,6 +118,9 @@
 		      <div id="PosicaoTP4" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP4')"></div>
 		      <div id="PosicaoTP5" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP5')"></div>
 		      <div id="PosicaoTP6" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP6')"></div>
+					<div id="PosicaoTP7" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP7')"></div>
+		      <div id="PosicaoTP8" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP8')"></div>
+		      <div id="PosicaoTP9" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP9')"></div>
 		    </div>
 		  </div>
 			<!-- 3ª Linha: Caixa de infos -->
@@ -134,7 +140,7 @@
 
 		</div>
   </body>
-  <script type="module" src="/src/main.js"></script>
+	 <script type="module" src="/src/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
   <script>eruda.init();</script>
 </html>
