@@ -1,146 +1,198 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Card Path game</title>
-		<link rel="manifest" href="/manifest.json">
-  </head>
-  <body>
-    <div id="TelaInicial" class="tela">
-      <div id="btnStart" class="btnGlobal" onclick="mudarTela('TelaSelect')">START</div>
-    </div>
 
-    <div id="TelaSelect" class="tela oculto">
-			<div id="SelectTitle">SLECIONE SEU PERSONAGEM</div>
-      <div id="iconCharacters" class="">
-				<div id="seleçãoP1" class="SeleçãoIcone2"></div>
-				<div id="seleçãoP2" class="SeleçãoIcone"></div>
-				<div id="seleçãoP3" class="SeleçãoIcone"></div>
-				<div id="seleçãoP4" class="SeleçãoIcone"></div>
-			</div>
-			<div id="TSpersoInfos"></div>
-			<div id="BoxPersonagem">
-				<div id="ColumnCentral">
-					<div id="iconPerso" class="">1</div>
-      		<div id="botaoSelect" class="btnGlobal" onclick="montarDeck(); mudarTela('TelaSkillsEPassivas')">ESCOLHER</div>
-				</div>
-				
-				<div id="btnProx" class="" onclick="SelecaoPerso('avancar')">></div>
-				<div id="btnAnter" class="" onclick="SelecaoPerso('voltar')"><</div>
-			</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Card Path game</title>
+	<link rel="manifest" href="/manifest.json">
+</head>
+
+<body>
+	<div id="TelaInicial" class="tela">
+		<div id="btnStart" class="btnGlobal" onclick="mudarTela('TelaSelect')">START</div>
+	</div>
+
+	<div id="TelaSelect" class="tela oculto">
+		<div id="SelectTitle">SLECIONE SEU PERSONAGEM</div>
+		<div id="iconCharacters" class="">
+			<div id="seleçãoP1" class="SeleçãoIcone2"></div>
+			<div id="seleçãoP2" class="SeleçãoIcone"></div>
+			<div id="seleçãoP3" class="SeleçãoIcone"></div>
+			<div id="seleçãoP4" class="SeleçãoIcone"></div>
 		</div>
 
-		<div id="TelaSkillsEPassivas" class="tela oculto">
-			<div id="BoxPassivasTitle" class="Boxes">HABILIDADES INICIAIS</div>
-			<div id="BoxPassivas" class="">
-				<div data-id="Passiva1" class="PassivasP"></div>
-				<div data-id="Passiva2" class="PassivasP"></div>
-				<div data-id="Passiva3" class="PassivasP"></div>
+		<div id="TSpersoInfos"></div>
+
+		<div id="BoxPersonagem">
+			<div id="ColumnCentral">
+				<div id="iconPerso" class="">1</div>
+				<div id="botaoSelect" class="btnGlobal" onclick="montarDeck(); mudarTela('TelaSkillsEPassivas')">
+					ESCOLHER</div>
 			</div>
-			
-			<div id="BoxBaralhoTitle" class="Boxes">CARTAS INICIAIS</div>
-			<div id="BoxBaralho" class="Boxes">
-				<div id="1Carta" class="Cards imagemStyle"></div>
-				<div id="2Carta" class="Cards imagemStyle"></div>
-				<div id="3Carta" class="Cards imagemStyle"></div>
-				<div id="4Carta" class="Cards imagemStyle"></div>
-				<div id="5Carta" class="Cards imagemStyle"></div>
-				<div id="6Carta" class="Cards imagemStyle"></div>
-				<div id="7Carta" class="Cards imagemStyle"></div>
-				<div id="8Carta" class="Cards imagemStyle"></div>
-				<div id="9Carta" class="Cards imagemStyle"></div>
+			<div id="btnProx" class="" onclick="SelecaoPerso('avancar')">></div>
+			<div id="btnAnter" class="" onclick="SelecaoPerso('voltar')">z</div>
+		</div>
+	</div>
+
+	<div id="TelaSkillsEPassivas" class="tela oculto">
+		<div id="BoxPassivasTitle" class="Boxes">HABILIDADES INICIAIS</div>
+		<div id="BoxPassivas" class="">
+			<div data-id="Passiva1" class="PassivasP"></div>
+			<div data-id="Passiva2" class="PassivasP"></div>
+			<div data-id="Passiva3" class="PassivasP"></div>
+		</div>
+
+		<div id="BoxBaralhoTitle" class="Boxes">CARTAS INICIAIS</div>
+		<div id="BoxBaralho" class="Boxes">
+			<div id="1Carta" class="Cards imagemStyle"></div>
+			<div id="2Carta" class="Cards imagemStyle"></div>
+			<div id="3Carta" class="Cards imagemStyle"></div>
+			<div id="4Carta" class="Cards imagemStyle"></div>
+			<div id="5Carta" class="Cards imagemStyle"></div>
+			<div id="6Carta" class="Cards imagemStyle"></div>
+			<div id="7Carta" class="Cards imagemStyle"></div>
+			<div id="8Carta" class="Cards imagemStyle"></div>
+			<div id="9Carta" class="Cards imagemStyle"></div>
+		</div>
+
+		<div id="BoxBotoes">
+			<div id="btnPersonagens" class="btnGlobal" onclick="mudarTela('TelaSelect')">PERSONAGENS</div>
+			<div id="btnGame" class="btnGlobal" onclick="mudarTela('TelaPrincipal')">COMEÇAR ></div>
+		</div>
+
+		<div id="PopUpskillaCards" class="oculto" onclick="DesativarPopUp()">
+			<div id="PopUpSC">
+				<div id="linhaSprites" class=""></div>
+				<div id="linhaInfos" class=""></div>
 			</div>
-			
-			<div id="BoxBotoes">
-				<div id="btnPersonagens" class="btnGlobal" onclick="mudarTela('TelaSelect')">< PERSONAGENS</div>
-				<div id="btnGame" class="btnGlobal" onclick="mudarTela('TelaPrincipal')">COMEÇAR ></div>
+		</div>
+	</div>
+
+	<div id="TelaPrincipal" class="tela oculto">
+		<div id="TopBar" class="">
+			<div id="DisplayLvl" class="btnBar">Level: 100</div>
+			<div id="DisplayAndar" class="btnBar">Andar: 99</div>
+			<div id="DisplayGold" class="btnBar">Gold: 1000</div>
+		</div>
+		<div id="fundoImg" class="imagemStyle"></div>
+		<div id="Hotbar" class="">
+			<div id="btn1" class="btnBar">perfil</div>
+			<div id="btn2" class="btnBar">Cartas</div>
+			<div id="btn3" class="btnBar" onclick="MontarDeckEnimigo(); CicloCartas(); mudarTela('TelaBatalha')">
+				Batalhar</div>
+			<div id="btn4" class="btnBar">Lojas</div>
+		</div>
+	</div>
+
+	<div id="PopPainelfundo" class="tela oculto" onclick="AbrirPopPainel()">
+		<div id="PopPainel" class="">
+			<div id="PrimeiraRow" class="PopRows">
+				<div id="DivImagem"></div>
+				<div id="DivAcoes"></div>
 			</div>
-			
-			<div id="PopUpskillaCards" class="oculto" onclick="DesativarPopUp()">
-				<div id="PopUpSC">
-					<div id="linhaSprites" class=""></div>
-					<div id="linhaInfos" class=""></div>
+
+			<div id="SegundaRow" class="PopRows">
+				<div id="DivTrocaPerfies">
+					<div id="trocaPlayer" class="DivsTrocar">PLAYER</div>
+					<div id="trocaInimigo" class="DivsTrocar">MONTROS</div>
+				</div>
+				<div id="DivMonstros"></div>
+				<div id="DivInimigos">
+					<div id="BoxPerfilMob1" class="boxPerfilMobs">
+						<div id="MobPimg1" class="MobsIMG"></div>
+						<div id="Mob1Satus" class="MobsPStatstus"></div>
+					</div>
+					<div id="BoxPerfilMob2" class="boxPerfilMobs">
+						<div id="MobPimg1" class="MobsIMG"></div>
+						<div id="Mob1Satus" class="MobsPStatstus"></div>
+					</div>
+					<div id="BoxPerfilMob3" class="boxPerfilMobs">
+						<div id="MobPimg1" class="MobsIMG"></div>
+						<div id="Mob1Satus" class="MobsPStatstus"></div>
+					</div>
+					<div id="BoxPerfilMob4" class="boxPerfilMobs">
+						<div id="MobPimg1" class="MobsIMG"></div>
+						<div id="Mob1Satus" class="MobsPStatstus"></div>
+					</div>
+					<div id="BoxPerfilMob5" class="boxPerfilMobs">
+						<div id="MobPimg1" class="MobsIMG"></div>
+						<div id="Mob1Satus" class="MobsPStatstus"></div>
+					</div>
+					<div id="BoxPerfilMob6" class="boxPerfilMobs">
+						<div id="MobPimg1" class="MobsIMG"></div>
+						<div id="Mob1Satus" class="MobsPStatstus">
+							<div id="idbarnome" class="BarsHPeName">WOLF</div>
+							<div id="idbarHP6" class="BarsHPeName">HP: 10/10</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div id="TelaPrincipal" class="tela oculto">
-			<div id="TopBar" class="">
-			 <div id="btn1" class="btnBar">Level: 100</div>
-			 <div id="btn2" class="btnBar">Andar: 99</div>
-			 <div id="btn3" class="btnBar">Gold: 1000</div>
+	<div id="TelaBatalha" class="tela oculto">
+		<!-- 1ª Linha: Perfil Inimigo -->
+		<div id="RowInimigo" class="">
+			<div id="BoxPerfilBot" class="">
+				<div id="IconBoxBot" class="imagemStyle"></div>
+				<div id="barHPBot" class="">HP: 100/100</div>
 			</div>
-			<div id="fundoImg" class="imagemStyle"></div>
-			<div id="Hotbar" class="">
-			 <div id="btn1" class="btnBar">perfil</div>
-			 <div id="btn2" class="btnBar">Cartas</div>
-			 <div id="btn3" class="btnBar" onclick="MontarDeckEnimigo(); CicloCartas(); mudarTela('TelaBatalha')">Batalhar</div>
-			 <div id="btn4" class="btnBar">Lojas</div>
-		 </div>
+
+			<div id="BoxCartasBot" class="">
+
+			</div>
+		</div>
+		<!-- 2ª Linha: Do meio, Tabuleiro -->
+		<div id="RowTabuleiro" class="">
+			<!-- Grid do Inimigo (Linha 1) -->
+			<div id="PosicoesEnemy" class="">
+				<div id="PosicaoT1" class="PosiçõesT"></div>
+				<div id="PosicaoT2" class="PosiçõesT"></div>
+				<div id="PosicaoT3" class="PosiçõesT"></div>
+				<div id="PosicaoT4" class="PosiçõesT"></div>
+				<div id="PosicaoT5" class="PosiçõesT"></div>
+				<div id="PosicaoT6" class="PosiçõesT"></div>
+				<div id="PosicaoT7" class="PosiçõesT"></div>
+				<div id="PosicaoT8" class="PosiçõesT"></div>
+				<div id="PosicaoT9" class="PosiçõesT"></div>
+			</div>
+
+			<!-- Barra Divisória (Linha 2) -->
+			<div id="Bar"></div>
+
+			<!-- Grid do Aliado (Linha 3) -->
+			<div id="PosicoesAliado" class="">
+				<div id="PosicaoTP1" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP1')"></div>
+				<div id="PosicaoTP2" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP2')"></div>
+				<div id="PosicaoTP3" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP3')"></div>
+				<div id="PosicaoTP4" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP4')"></div>
+				<div id="PosicaoTP5" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP5')"></div>
+				<div id="PosicaoTP6" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP6')"></div>
+				<div id="PosicaoTP7" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP7')"></div>
+				<div id="PosicaoTP8" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP8')"></div>
+				<div id="PosicaoTP9" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP9')"></div>
+			</div>
+		</div>
+		<!-- 3ª Linha: Caixa de infos -->
+		<div id="BoxInfos" class="">
+			<div id="BoxEnergia" class="Xx">4</div>
+			<div id="BoxTurno" class="Xx">Turno: Player</div>
+			<div id="BoxTime" class="Xx">00:00</div>
+			<div id="BoxReinicarMao" class="Xx" onclick="CicloCartas()">🔄</div>
+		</div>
+		<!-- 4ª Linha: Mão do Player -->
+		<div id="RowPlayer" class="">
+			<div id="SlotC1" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC1')"></div>
+			<div id="SlotC2" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC2')"></div>
+			<div id="SlotC3" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC3')"></div>
+			<div id="SlotC4" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC4')"></div>
 		</div>
 
-		<div id="TelaBatalha" class="tela oculto">	
-			  <!-- 1ª Linha: Perfil Inimigo -->
-		  <div id="RowInimigo" class="">
-				<div id="BoxPerfilBot" class="">
-					<div id="IconBoxBot" class="imagemStyle"></div>
-					<div id="barHPBot" class="">HP: 100/100</div>
-				</div>
+	</div>
+</body>
+<script type="module" src="/src/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>eruda.init();</script>
 
-				<div id="BoxCartasBot" class="">
-					
-				</div>
-			</div>
-			  <!-- 2ª Linha: Do meio, Tabuleiro -->
-		  <div id="RowTabuleiro" class="">
-		    <!-- Grid do Inimigo (Linha 1) -->
-		    <div id="PosicoesEnemy" class="">
-		      <div id="PosicaoT1" class="PosiçõesT"></div>
-		      <div id="PosicaoT2" class="PosiçõesT"></div>
-		      <div id="PosicaoT3" class="PosiçõesT"></div>
-		      <div id="PosicaoT4" class="PosiçõesT"></div>
-		      <div id="PosicaoT5" class="PosiçõesT"></div>
-		      <div id="PosicaoT6" class="PosiçõesT"></div>
-		      <div id="PosicaoT7" class="PosiçõesT"></div>
-		      <div id="PosicaoT8" class="PosiçõesT"></div>
-		      <div id="PosicaoT9" class="PosiçõesT"></div>
-		    </div>
-
-		    <!-- Barra Divisória (Linha 2) -->
-		    <div id="Bar"></div>
-
-		    <!-- Grid do Aliado (Linha 3) -->
-		    <div id="PosicoesAliado" class="">
-		      <div id="PosicaoTP1" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP1')"></div>
-		      <div id="PosicaoTP2" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP2')"></div>
-		      <div id="PosicaoTP3" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP3')"></div>
-		      <div id="PosicaoTP4" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP4')"></div>
-		      <div id="PosicaoTP5" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP5')"></div>
-		      <div id="PosicaoTP6" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP6')"></div>
-					<div id="PosicaoTP7" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP7')"></div>
-		      <div id="PosicaoTP8" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP8')"></div>
-		      <div id="PosicaoTP9" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP9')"></div>
-		    </div>
-		  </div>
-			<!-- 3ª Linha: Caixa de infos -->
-			<div id="BoxInfos" class="">
-			  <div id="BoxEnergia" class="Xx">4</div>
-			  <div id="BoxTurno" class="Xx">Turno: Player</div>
-			  <div id="BoxTime" class="Xx">00:00</div>
-			  <div id="BoxReinicarMao" class="Xx" onclick="CicloCartas()">🔄</div>
-			</div>
-			<!-- 4ª Linha: Mão do Player -->
-			<div id="RowPlayer" class="">
-			  <div id="SlotC1" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC1')"></div>
-			  <div id="SlotC2" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC2')"></div>
-			  <div id="SlotC3" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC3')"></div>
-			  <div id="SlotC4" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC4')"></div>
-			</div>
-
-		</div>
-  </body>
-	 <script type="module" src="/src/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
 </html>

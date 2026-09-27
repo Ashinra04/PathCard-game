@@ -1,36 +1,41 @@
 body {
-  -webkit-user-select: none; 
-  -moz-user-select: none;
-  -ms-user-select: none;  
-  user-select: none;  
-  -webkit-tap-highlight-color: transparent;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: transparent;
 }
+
 body,
 html {
-    margin: 0; padding: 0;
-    width: 100%; height: 100%;
-    font-family: 'Cinzel', serif;
-    background: radial-gradient(circle at center, #2e1e36 0%, #110e1a 100%);
-    color: #e2d7e0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	font-family: 'Cinzel', serif;
+	background: radial-gradient(circle at center, #2e1e36 0%, #110e1a 100%);
+	color: #e2d7e0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 }
+
 .oculto {
-  display: none !important;
+	display: none !important;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
+
 .imagemStyle {
 	background-position: center;
-  background-repeat: no-repeat;
-  image-rendering: pixelated; 
-  image-rendering: crisp-edges;
+	background-repeat: no-repeat;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
 
 /*
@@ -55,136 +60,159 @@ h1 {
 }
 */
 #CORES {
-  background-color: hwb(0 0% 68%);
-  background-color: hwb(48 53% 15%);
-  background-color: hwb(234 0% 60%);
+	background-color: hwb(0 0% 68%);
+	background-color: hwb(48 53% 15%);
+	background-color: hwb(234 0% 60%);
 }
+
 /*----------------------------------------
 TELA INICIAL MENU
 -------------------------------------------*/
 #TelaInicial {
-  width: 100%; height: 100%;
-  background-color: hwb(48 53% 15%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: hwb(48 53% 15%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+
 .btnGlobal {
 	border: 1px solid hwb(48 53% 15%);
 	background-color: hwb(218 0% 40% / 1);
 	display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
 }
 
 #btnStart {
-  width: 50%; height: 10%;
+	width: 50%;
+	height: 10%;
 }
 
 /*----------------------------------------
 TELA SELECAO DE PERSONAGEM
 -------------------------------------------*/
 #TelaSelect {
-  width: 100%; height: 100%;
-  display: grid;
-  grid-template-rows: 6% 14% 20% 60%;
-  overflow: hidden;
+	width: 100%;
+	height: 100%;
+	display: grid;
+	grid-template-rows: 6% 14% 20% 60%;
+	overflow: hidden;
 	flex-direction: bottom;
 }
+
 #SelectTitle {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	grid-row: 1;
-  background-color: hwb(218 0% 40% / 1);
+	background-color: hwb(218 0% 40% / 1);
 	border: 1px solid hwb(48 53% 15%);
-	display: flex; align-items: center; justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .btnsPA {
-  background-color: gray;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  align-self: center; 
-  height: 100%; 
+	background-color: gray;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	align-self: center;
+	height: 100%;
 }
 
 #iconCharacters {
-  height: 100%;
+	height: 100%;
 	display: grid;
-  align-self: center;
+	align-self: center;
 	grid-template-columns: repeat(4, 1fr);
-  grid-row: 2;
+	grid-row: 2;
 	background-color: gray;
 }
+
 .SeleçãoIcone {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	border: 1px solid black;
 	background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  image-rendering: pixelated; 
-  image-rendering: crisp-edges;
+	background-repeat: no-repeat;
+	background-size: contain;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
+
 .SeleçãoIcone2 {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	background-color: hwb(48 53% 15%);
 	border: 1px solid black;
 	background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  image-rendering: pixelated; 
-  image-rendering: crisp-edges;
+	background-repeat: no-repeat;
+	background-size: contain;
+	image-rendering: pixelated;
+	image-rendering: crisp-edges;
 }
+
 #seleçãoP1 {
 	background-image: url('/Imagens/SwordClass.png');
 }
+
 #seleçãoP2 {
 	background-image: url('/Imagens/StaffClass.png');
 }
+
 #seleçãoP3 {
 	background-image: url('/Imagens/BowClass.png');
 }
+
 #seleçãoP4 {
 	background-image: url('/Imagens/DaggerClass.png');
 }
 
 #TSpersoInfos {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	grid-row: 3;
-  background-color: hwb(218 0% 40% / 1);
+	background-color: hwb(218 0% 40% / 1);
 	border: 1px solid hwb(48 53% 15%);
-	display: flex; align-items: center; justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 #BoxPersonagem {
 	width: 100%;
 	height: 100%;
-  background-color: white;
+	background-color: white;
 	display: grid;
 	grid-template-columns: 10% 80% 10%;
 	grid-template-rows: 100%;
-  grid-row: 4;
+	grid-row: 4;
 }
 
-#btnAnter, #btnProx {
+#btnAnter,
+#btnProx {
 	width: 100%;
 	height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
 	grid-row: 1;
 	color: white;
 	background-color: hwb(0 0% 68%);
 }
+
 #btnAnter {
-  grid-column: 1;
+	grid-column: 1;
 	border-right: 1px solid lab(0% 0 0);
 }
+
 #btnProx {
-  grid-column: 3;
+	grid-column: 3;
 	border-left: 1px solid lab(0% 0 0);
 }
 
@@ -193,59 +221,67 @@ TELA SELECAO DE PERSONAGEM
 	width: 100%;
 	display: grid;
 	grid-template-rows: 88% 12%;
-  align-self: center;
-  grid-column: 2;
+	align-self: center;
+	grid-column: 2;
 	grid-row: 1;
 	background-color: gray;
 }
+
 #iconPerso {
 	height: 100%;
-  grid-row: 1;
+	grid-row: 1;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
 }
+
 #botaoSelect {
-  grid-row: 2;
-  height: 100%;
+	grid-row: 2;
+	height: 100%;
 }
 
 /*----------------------------------------
 TELA SKILLS E CARTAS 
 -------------------------------------------*/
 #TelaSkillsEPassivas {
-  width: 100%; height: 100%;
-  background-color: #000000;
-  display: grid;
-  grid-template-rows: 5% 21% 5% 62% 7%;
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	display: grid;
+	grid-template-rows: 5% 21% 5% 62% 7%;
 }
 
 #BoxPassivas {
 	height: 100%;
-  background-color: gray;
+	background-color: gray;
 	padding: 2%;
 	gap: 1%;
-  grid-row: 2;
+	grid-row: 2;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 }
+
 .PassivasP {
-	height: 100%; width: 100%;
-  background-color: hwb(206 36% 11% / 0.4235294117647059);
+	height: 100%;
+	width: 100%;
+	background-color: hwb(206 36% 11% / 0.4235294117647059);
 }
 
 .Boxes {
-	height: 100%; width: 100%;
-  font-size: clamp(16px, 4dvmax, 32px);
-  background-color: hwb(0 31% 67%);
+	height: 100%;
+	width: 100%;
+	font-size: clamp(16px, 4dvmax, 32px);
+	background-color: hwb(0 31% 67%);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 #BoxPassivasTitle {
 	grid-row: 1;
 }
+
 #BoxBaralhoTitle {
 	grid-row: 3;
 }
@@ -254,36 +290,41 @@ TELA SKILLS E CARTAS
 	height: 100%;
 	padding: 1%;
 	gap: 1.5%;
-  background-color: gray;
-  grid-row: 4;
+	background-color: gray;
+	grid-row: 4;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-auto-rows: auto;
 	box-sizing: border-box;
 }
+
 .Cards {
-	height: 100%; width: 100%;
-  background-color: hwb(0 100% 0%);
-  background-size: contain;
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 100% 0%);
+	background-size: contain;
 }
 
 #BoxBotoes {
 	height: 100%;
-  background-color: gray;
+	background-color: gray;
 	grid-row: 5;
 	display: grid;
 	grid-template-columns: 50% 50%;
 }
+
 #btnPersonagens {
 	grid-column: 1;
 }
+
 #btnGame {
 	grid-column: 2;
 }
 
 #PopUpskillaCards {
-	height: 100%; width: 100%;
-  background-color: hwb(0 31% 67% / 0.8117647058823529);
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 31% 67% / 0.8117647058823529);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -292,36 +333,46 @@ TELA SKILLS E CARTAS
 	justify-content: center;
 	align-items: center;
 }
+
 #PopUpSC {
-	height: 80%; width: 90%;
+	height: 80%;
+	width: 90%;
 	border: 1.5px solid hwb(62 38% 3%);
 	display: grid;
 	grid-template-rows: 35% 65%;
 }
+
 #linhaSprites {
-	height: 100%; width: 100%;
-  background-color: hwb(0 24% 36%);
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 24% 36%);
 	grid-row: 1;
 }
+
 #linhaInfos {
-	height: 100%; width: 100%;
-  background-color: hwb(0 72% 4%);
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 72% 4%);
 	border-top: 1.5px solid hwb(62 38% 3%);
 	grid-row: 2;
 }
+
 /*----------------------------------------
 TELA PRINCIPAL
 -------------------------------------------*/
 #TelaPrincipal {
-  width: 100%; height: 100%;
-  background-color: #646464FF;
-  display: grid;
+	width: 100%;
+	height: 100%;
+	background-color: #646464FF;
+	display: grid;
 	grid-template-rows: 5% 85% 10%;
 }
+
 #TopBar {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	grid-row: 1;
-  background-color: #535353;
+	background-color: #535353;
 	border-top: 2px solid lab(0% 0 0);
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
@@ -329,28 +380,33 @@ TELA PRINCIPAL
 }
 
 #fundoImg {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	grid-row: 2;
 	background-image: url('/Imagens/Floor.png');
-  background-size: contain;
+	background-size: contain;
 }
 
 #Hotbar {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	grid-row: 3;
-  background-color: #535353;
+	background-color: #535353;
 	border-top: 2px solid lab(0% 0 0);
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-auto-rows: auto;
 }
+
 .btnBar {
-	width: 100%; height: 100%;
+	width: 100%;
+	height: 100%;
 	border-right: 1px solid black;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
 .btnBar:last-child {
-  border-right: none;
+	border-right: none;
 }
