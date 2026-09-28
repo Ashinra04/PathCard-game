@@ -1,4 +1,11 @@
 /*----------------------------------------
+cores HEX: 
+#2A2D34 
+#E94F37 
+#C2C18A 
+#3F88C5 
+#FFFFFF
+
 POP PAINEL
 -------------------------------------------*/
 #PopPainelfundo {
@@ -8,88 +15,97 @@ POP PAINEL
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 5;
-	display: flex;
-	justify-content: center;
+	z-index: 2;
+	display: flex; justify-content: center;
 	align-items: center;
 }
-
 #PopPainel {
-	height: 95%; width: 85%;
+	height: 95%; width: 90%;
   background-color: #333333b2;
-  display: grid;
-  grid-template-rows: 40% 60%;
+  display: grid; z-index: 3;
+  grid-template-rows: 55% 45%;
 }
 .PopRows{
   height: 100%; width: 100%;
 }
 /*- ROW DO TOP-*/
 #PrimeiraRow {
-  grid-row: 1; gap: 1%;
+  grid-row: 1; padding: 1%;
   display: grid; grid-template-rows: 60% 40%;
-  background-color: #222222;
 }
 #DivImagem{
   height: 100%; width: 100%;
-  border: 2px solid #01a9d3;
+  border: 1.5px solid #3F88C5;
+	background-color: #2A2D34;
   grid-row: 1;
 }
 #DivAcoes{
   height: 100%; width: 100%;
-  grid-row: 2;
+  grid-row: 2; display: grid; 
+	padding: 2%; gap: 1%; padding-bottom: 1%;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: repeat(3, 1fr);
+}
+.btnsAcoes {
+	height: 100%; width: 100%;
+	border: 1px solid #C2C18A;
+	background-color: #2A2D34;
+}
+
+#DivTrocaPerfies{
+  height: 100%; width: 100%;
+  grid-row: 1; display: flex;
+  flex-direction: row; gap: 0.5%;
+}
+.DivsTrocar{
+  flex: 1; border: 1px solid #C2C18A;
+	background-color: #2A2D34;
+	display: flex; justify-content: center;
+	align-items: center;
+}
+.DivsTrocar2{
+  flex: 1; border: 1px solid #C2C18A;
+	background-color: #3F434E;
+	display: flex; justify-content: center;
+	align-items: center;
 }
 
 /*- BOX PERFIL DE TODOS EM CAMPO-*/
-#DivTrocaPerfies{
-  height: 100%; width: 100%;
-  background-color: #904c15;
-  grid-row: 1; display: flex;
-  flex-direction: row;
-}
-.DivsTrocar{
-  flex: 1; border: 1px solid white;
-}
 #SegundaRow { 
-  grid-row: 2; gap: 1%; padding: 2%;
-  display: grid; grid-template-rows: 10% 90%;
+  grid-row: 2; gap: 1%; padding: 3%; padding-top: 1%;
+  display: grid; grid-template-rows: 15% 85%;
 }
-/*- BOX PERFIL DE TODOS DO PLAYER-*/
-/*#DivMonstros{
-  height: 100%; width: 100%;
-  background-color: #904c15;
-  grid-row: 2;
-}*/
-
-/*- BOX PERFIL DE TODOS DO BOT-*/
-#DivInimigos{
-  height: 100%; width: 100%; gap: 2%;
-  display: grid; grid-row: 2; 
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+#DivPerfies{
+  height: 100%; width: 100%; gap: 3%;
+  display: grid; grid-row: 2;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(3, 1fr);
 }
 .boxPerfilMobs{
   height: 100%; width: 100%; display: grid;
-  grid-template-rows: 60% 40%;
-  background-color: #5a6177;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 50% 50%;
+  background-color: #2A2D34;
 }
 .MobsIMG{
   height: 100%; width: 100%;
-  grid-row: 1;
-  border: 2px solid #01a9d3;
-  background-image: url('/Imagens/CartasGlobais/WolfBS.png');
+  grid-column: 1; grid-row: 1 / 3;
+	background-color: #3F88C5;
+  border-right: 0.5px solid hwb(59 54% 24%);
   background-position: center;
   background-size: contain;
 	background-repeat: no-repeat;
 	image-rendering: pixelated;
 	image-rendering: crisp-edges;
 }
-.MobsPStatstus{
-  height: 100%; width: 100%;
-  background-color: #222222;
-  grid-row: 2; display: flex; flex-direction: column;
+.BarsName{
+	grid-column: 2; grid-row: 1;
+  display: flex; font-size: 16px;
+  justify-content: center; align-items: center;
 }
-.BarsHPeName{
-  flex: 1; border: 1px solid white;
+.BarsHP{
+	grid-column: 2; grid-row: 2;
+	flex: 1; border-top: 0.5px solid hwb(59 54% 24%);
   display: flex; font-size: 16px;
   justify-content: center; align-items: center;
 }
@@ -97,107 +113,85 @@ POP PAINEL
 TELA BATALHA
 -------------------------------------------*/
 #TelaBatalha {
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
+  width: 100%; height: 100%;
+  background-color: #2A2D34;
   display: grid;
   grid-template-rows: 12% 67% 6% 15%;
 }
 
 /*=== Parte do Perfil do inimigo ===*/
 #RowInimigo {
-  grid-row: 1;
-  width: 100%;
-  height: 100%;
+	width: 100%; height: 100%;
   background-color: #792d2d;
-  display: grid;
+  grid-row: 1; display: grid;
   grid-template-columns: 35% 65%;
 }
 
 #BoxPerfilBot {
-  width: 100%;
-  height: 100%;
-  grid-column: 1;
+  width: 100%; height: 100%;
   background-color: #e7ebf9;
-  display: grid;
+	grid-column: 1; display: grid;
   grid-template-rows: 80% 20%;
 }
 
 #IconBoxBot {
-  width: 100%;
-  height: 100%;
-  grid-row: 1;
+  width: 100%; height: 100%; grid-row: 1;
   background-image: url('/Imagens/GIcon.png');
   background-size: cover;
 }
 
 #barHPBot {
-  width: 100%;
-  height: 100%;
-  grid-row: 2;
+  width: 100%; height: 100%;
   background-color: #993142;
   border: 1px solid black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  grid-row: 2; display: flex; 
+	justify-content: center; align-items: center;
   font-size: clamp(1rem, 3.5vw, 1.2rem);
   color: white;
   -webkit-text-stroke: 1px black;
 }
 
 #BoxCartasBot {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   grid-column: 2;
   background-color: #5a6177;
 }
 
 /*==== Parte do tabuleiro/meio da tela ====*/
 #RowTabuleiro {
-  grid-row: 2;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  padding: 1%;
+	width: 100%; height: 100%;
+  grid-row: 2;  display: grid; 
   grid-template-rows: 49% 2% 49%;
+	padding: 1%;
 }
 
 #PosicoesEnemy {
-  width: 100%;
-  height: 100%;
-  grid-row: 1;
-  display: grid;
+  width: 100%; height: 100%;
+  grid-row: 1; display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  padding-left: 2%; padding-right: 2%;
   gap: 2%;
-  padding-left: 2%;
-  padding-right: 2%;
 }
 
 #Bar {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   grid-row: 2;
-  background-color: #333;
+  background-color: #2A2D34;
 }
 
 #PosicoesAliado {
-  width: 100%;
-  height: 100%;
-  grid-row: 3;
-  display: grid;
+  width: 100%; height: 100%;
+  grid-row: 3; display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 2%;
-  padding-left: 2%;
-  padding-right: 2%;
+  gap: 2%; padding-left: 2%; padding-right: 2%;
 }
 
 .PosiçõesT {
-  width: 100%;
-  height: 100%;
-  background-color: #d06c6c;
-  border: 2px solid hwb(59 54% 24%);
+  width: 100%; height: 100%;
+  background-color: #9d9b9b;
+  border: 2px solid #C2C18A;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -232,11 +226,10 @@ TELA BATALHA
   grid-row: 4;
   width: 100%;
   height: 100%;
-  background-color: #5a6177;
+  background-color: #3F88C5;
   display: flex;
   flex-direction: row;
-  gap: 1%;
-  padding: 1%;
+  padding: 0.6%;
 }
 
 .CardsSlots {
@@ -252,18 +245,13 @@ TELA BATALHA
 
 /*==== BOX DAS INFOS EM GERAL ====*/
 #BoxInfos {
-  grid-row: 3;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  align-items: end;
+  grid-row: 3; width: 100%; height: 100%;
+  display: grid; align-items: end;
   grid-template-columns: 17% 40% 25% 18%;
-  gap: 0.1%;
-  padding: 1%;
-  background-color: #1a1a1a;
+  gap: 0.1%; padding: 1%;
 }
 
-.Xx {
+.txt {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -275,7 +263,7 @@ TELA BATALHA
   width: 100%;
   height: 100%;
   grid-column: 1;
-  border: 2px solid hwb(59 54% 24%);
+  border: 2px solid #3F88C5;
   border-radius: 20% 20% 0 0;
   font-size: clamp(2rem, 3vw, 3rem);
   background-color: #01a9d3;
@@ -285,19 +273,19 @@ TELA BATALHA
   width: 100%;
   height: 80%;
   grid-column: 2;
-  border: 2px solid hwb(59 54% 24%);
+  border: 2px solid #3F88C5;
 }
 
 #BoxTime {
   width: 100%;
   height: 80%;
   grid-column: 3;
-  border: 2px solid hwb(59 54% 24%);
+  border: 2px solid #3F88C5;
 }
 
 #BoxReinicarMao {
   width: 100%;
   height: 80%;
   grid-column: 4;
-  border: 2px solid hwb(59 54% 24%);
+  border: 2px solid #3F88C5;
 }

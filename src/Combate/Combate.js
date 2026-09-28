@@ -48,6 +48,81 @@ window.montarDeck = function () {
     CPosicao.style.backgroundImage = `url('${indexImagem}')`;
   }
 }
+window.MontarDeckEnimigo = function () {
+  const numeroSorteados = [];
+
+  while (numeroSorteados.length < 6) {
+    const NRandom = Math.floor(Math.random() * 4);
+    const ID = window.cartasEMaos[NRandom];
+    const ImgCaminho = window.CentralImagens[ID];
+
+    const PRandom = Math.floor(Math.random() * 9) + 1;
+    if (!numeroSorteados.includes(PRandom)) {
+      numeroSorteados.push(PRandom);
+      const Pindex = PRandom - 1;
+      tabuleiroPE[Pindex] = ID;
+      const EnemyPosition = document.getElementById(`PosicaoT${PRandom}`);
+      EnemyPosition.style.backgroundImage = `url('${ImgCaminho}')`;
+    }
+  }
+  //console.log(tabuleiroPE);
+}
+window.perfilEmCampo = function(){
+	const botaoClicado = event.currentTarget;
+	let num = 1; let QualPerfies = "doBot";
+	let PerfilLoop;
+	const btnMobs = document.getElementById('trocaInimigo');
+	const btnPlayer = document.getElementById('trocaPlayer');
+	
+  if (botaoClicado.id === "trocaPlayer")
+	{ QualPerfies = "doPlayer"; 
+		btnMobs.className = "DivsTrocar"
+		btnPlayer.className = "DivsTrocar2" } 
+	else if(botaoClicado.id == "trocaInimigo")
+	{ QualPerfies = "doBot"; 
+	btnMobs.className = "DivsTrocar2"
+	btnPlayer.className = "DivsTrocar" }
+	
+	if(QualPerfies === "doBot") 
+	{ PerfilLoop = tabuleiroPE;} 
+	else if(QualPerfies === "doPlayer") 
+	{ PerfilLoop = tabuleiroP; }
+
+	const DivPerfilPai = document.getElementById("DivPerfies");
+	DivPerfilPai.innerHTML = '';
+	
+	PerfilLoop.forEach(Perfil => {
+  	if (Perfil !== '') {		
+	    const BoxPerfilPai = document.createElement("div");
+	    BoxPerfilPai.id = `BoxPerfilMob${num}`;
+	    BoxPerfilPai.className = "boxPerfilMobs";
+	    DivPerfilPai.appendChild(BoxPerfilPai);
+	
+	    const imgbox = document.createElement("div");
+	    imgbox.id = `MobPimg${num}`;
+			imgbox.className = "MobsIMG";
+	    BoxPerfilPai.appendChild(imgbox);
+	
+	    const Namebox = document.createElement("div");
+	    Namebox.id = `idbarnome${num}`;
+			Namebox.className = "BarsName";
+	    BoxPerfilPai.appendChild(Namebox);
+	
+	    const HPbox = document.createElement("div");
+	    HPbox.id = `idbarHP${num}`;
+			HPbox.className = "BarsHP";
+			HPbox.innerText = "HP 10 / 10";
+	    BoxPerfilPai.appendChild(HPbox);
+	
+	    let caminhoimg = CentralImagens[Perfil];
+	    if (Namebox) Namebox.innerText = Perfil;
+	    if (imgbox) imgbox.style.backgroundImage = `url('${caminhoimg}')`;
+	    
+	    num++;
+		}
+	});
+}
+
 window.CicloCartas = function () {
   const MaoPlayer = document.getElementById("RowPlayer");
   MaoPlayer.innerHTML = '';
@@ -138,23 +213,5 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
       console.log("Selecionar uma carta");
     }
   }
+	perfilEmCampo();
 };
-window.MontarDeckEnimigo = function () {
-  const numeroSorteados = [];
-
-  while (numeroSorteados.length < 6) {
-    const NRandom = Math.floor(Math.random() * 4);
-    const ID = window.cartasEMaos[NRandom];
-    const ImgCaminho = window.CentralImagens[ID];
-
-    const PRandom = Math.floor(Math.random() * 9) + 1;
-    if (!numeroSorteados.includes(PRandom)) {
-      numeroSorteados.push(PRandom);
-      const Pindex = PRandom - 1;
-      tabuleiroPE[Pindex] = ID;
-      const EnemyPosition = document.getElementById(`PosicaoT${PRandom}`);
-      EnemyPosition.style.backgroundImage = `url('${ImgCaminho}')`;
-    }
-  }
-  //console.log(tabuleiroPE);
-}
