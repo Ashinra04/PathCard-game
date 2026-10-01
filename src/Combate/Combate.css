@@ -23,7 +23,7 @@ POP PAINEL
 	height: 95%; width: 90%;
   background-color: #333333b2;
   display: grid; z-index: 3;
-  grid-template-rows: 55% 45%;
+  grid-template-rows: 50% 50%;
 }
 .PopRows{
   height: 100%; width: 100%;
@@ -31,14 +31,70 @@ POP PAINEL
 /*- ROW DO TOP-*/
 #PrimeiraRow {
   grid-row: 1; padding: 1%;
-  display: grid; grid-template-rows: 60% 40%;
+  display: grid; grid-template-rows: 59% 41%;
 }
-#DivImagem{
+#DivImagemEStatus{
   height: 100%; width: 100%;
-  border: 1.5px solid #3F88C5;
-	background-color: #2A2D34;
-  grid-row: 1;
+  grid-row: 1; display: grid;
+	grid-template-columns: 45% 55%;
 }
+#BoxImg {
+	height: 100%; width: 100%;
+	grid-column: 1;
+	background-size: 100% 100%;
+	background-position: top;
+}
+#BoxStts {
+	height: 100%; width: 100%;
+	background-color: #2A2D34;
+	grid-column: 2; gap: 1%; padding: 1%;
+	display: grid; grid-template-rows: repeat(6, 1fr);
+}
+.RowsStatus {
+	height: 100%; width: 100%;
+	justify-content: start; padding-left: 2%;
+}
+#RowHP, #RowEnergia{ 
+	display: grid; padding: 1%;
+	grid-template-rows: 70% 30%;
+	grid-template-columns: 100%;
+}
+#hptext, #Energiatext{ 
+	height: 100%; width: 100%; 
+	grid-row: 1; 
+	align-items: end; padding-left: 1%;
+	justify-content: start; font-size: 20px;
+}
+#hpbar, #energiabar{ 
+	height: 100%; width: 100%;
+	grid-row: 2;
+	border: 1px solid #C2C18A;
+	border-radius: 4px;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+#hpfill{
+	height: 100%; width: 100%;
+	background-color: #0a7633;
+}
+#energiafill{
+	height: 100%; width: 100%;
+	background-color: #3F88C5;
+}
+
+#RowEfeitos{
+	background-color: #2A2D34;
+	grid-row: 5 / 7; display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 48% 48%; gap: 2%;
+	overflow: hidden; padding: 1%;;
+}
+.BoxsEfeitos {
+	height: 100%; width: 100%;
+	border: 0.5px solid #3F88C5;
+	background-color: #4e4f52;
+}
+
 #DivAcoes{
   height: 100%; width: 100%;
   grid-row: 2; display: grid; 
@@ -91,7 +147,7 @@ POP PAINEL
   height: 100%; width: 100%;
   grid-column: 1; grid-row: 1 / 3;
 	background-color: #3F88C5;
-  border-right: 0.5px solid hwb(59 54% 24%);
+  border-right: 0.5px solid #C2C18A;
   background-position: center;
   background-size: contain;
 	background-repeat: no-repeat;
@@ -102,6 +158,9 @@ POP PAINEL
 	grid-column: 2; grid-row: 1;
   display: flex; font-size: 16px;
   justify-content: center; align-items: center;
+	text-align: center;
+	overflow-wrap: break-word;
+	padding: 0.4px;
 }
 .BarsHP{
 	grid-column: 2; grid-row: 2;
@@ -192,6 +251,9 @@ TELA BATALHA
   width: 100%; height: 100%;
   background-color: #9d9b9b;
   border: 2px solid #C2C18A;
+	display: flex; padding: 2%;
+	box-sizing: border-box;
+	justify-content: left; align-items: start;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

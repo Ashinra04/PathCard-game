@@ -88,21 +88,53 @@
 	<div id="PopPainelfundo" class="tela oculto">
 		<div id="PopPainel" class="">
 			<div id="PrimeiraRow" class="PopRows">
-				<div id="DivImagem"></div>
+				<div id="DivImagemEStatus">
+					<div id="BoxImg" class="imagemStyle"></div>
+					<div id="BoxStts">
+						<div id="RowNome" class="RowsStatus textoUniversais">NOME</div>
+						<div id="RowTipo" class="RowsStatus textoUniversais">TIPO</div>
+						
+						<div id="RowHP" class="RowsStatus textoUniversais">
+							<div id="hptext" class="textoUniversais">HP: 10/ 10</div>
+							<div id="hpbar">
+								<div id="hpfill"></div>
+							</div>
+						</div>
+						<div id="RowEnergia" class="RowsStatus textoUniversais">
+							<div id="Energiatext" class="textoUniversais">Energia: 10/ 10</div>
+							<div id="energiabar">
+								<div id="energiafill"></div>
+							</div>
+						</div>
+						<div id="RowEfeitos" class="RowsStatus">
+							<div id="efeito1" class="BoxsEfeitos"></div>
+							<div id="efeito2" class="BoxsEfeitos"></div>
+							<div id="efeito3" class="BoxsEfeitos"></div>
+							<div id="efeito4" class="BoxsEfeitos"></div>
+							<div id="efeito5" class="BoxsEfeitos"></div>
+							<div id="efeito6" class="BoxsEfeitos"></div>
+							<div id="efeito7" class="BoxsEfeitos"></div>
+							<div id="efeito8" class="BoxsEfeitos"></div>
+							<div id="efeito9" class="BoxsEfeitos"></div>
+							<div id="efeito10" class="BoxsEfeitos"></div>
+							<div id="efeito11" class="BoxsEfeitos"></div>
+						</div>
+					</div>
+				</div>
 				<div id="DivAcoes">
 					<div id="BtnAtk" class="btnsAcoes textoUniversais">Atacar</div>
 					<div id="BtnDef" class="btnsAcoes textoUniversais">Defender</div>
 					<div id="BtnSkills" class="btnsAcoes textoUniversais">Habilidades</div>
 					<div id="BtnItems" class="btnsAcoes textoUniversais">Items</div>
-					<div id="BtnPassarVez" class="btnsAcoes textoUniversais">Pular Vez</div>
+					<div id="BtnPassarVez" class="btnsAcoes textoUniversais">Status</div>
 					<div id="BtnExit" class="btnsAcoes textoUniversais" onclick="AbrirPopPainel()">Fechar</div>
 				</div>
 			</div>
 
 			<div id="SegundaRow" class="PopRows">
 				<div id="DivTrocaPerfies">
-					<div id="trocaInimigo" class="DivsTrocar2" onclick="perfilEmCampo()"> <=MONTROS </div>
-					<div id="trocaPlayer" class="DivsTrocar" onclick="perfilEmCampo()"> PLAYER=> </div>
+					<div id="trocaInimigo" class="DivsTrocar2" onclick="perfilEmCampo('doBot')"> <=MONTROS </div>
+					<div id="trocaPlayer" class="DivsTrocar" onclick="perfilEmCampo('doPlayer')"> PLAYER=> </div>
 				</div>
 				
 				<div id="DivPerfies">
@@ -131,10 +163,10 @@
 		<div id="RowTabuleiro" class="">
 			<!-- Grid do Inimigo (Linha 1) -->
 			<div id="PosicoesEnemy" class="">
-				<div id="PosicaoT1" class="PosiçõesT"></div>
-				<div id="PosicaoT2" class="PosiçõesT"></div>
-				<div id="PosicaoT3" class="PosiçõesT"></div>
-				<div id="PosicaoT4" class="PosiçõesT"></div>
+				<div id="PosicaoT1" class="PosiçõesT">HP:10/ 10</div>
+				<div id="PosicaoT2" class="PosiçõesT">HP:10/ 10</div>
+				<div id="PosicaoT3" class="PosiçõesT">HP:10/ 10</div>
+				<div id="PosicaoT4" class="PosiçõesT">HP:10/ 10</div>
 				<div id="PosicaoT5" class="PosiçõesT"></div>
 				<div id="PosicaoT6" class="PosiçõesT"></div>
 				<div id="PosicaoT7" class="PosiçõesT"></div>
