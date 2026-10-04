@@ -87,6 +87,7 @@
 
 	<div id="PopPainelfundo" class="tela oculto">
 		<div id="PopPainel" class="">
+			<!-- 1 Parte que fica o perfil da cartas selecionada-->
 			<div id="PrimeiraRow" class="PopRows">
 				<div id="DivImagemEStatus">
 					<div id="BoxImg" class="imagemStyle"></div>
@@ -121,16 +122,23 @@
 						</div>
 					</div>
 				</div>
-				<div id="DivAcoes">
-					<div id="BtnAtk" class="btnsAcoes textoUniversais">Atacar</div>
-					<div id="BtnDef" class="btnsAcoes textoUniversais">Defender</div>
-					<div id="BtnSkills" class="btnsAcoes textoUniversais">Habilidades</div>
-					<div id="BtnItems" class="btnsAcoes textoUniversais">Items</div>
-					<div id="BtnPassarVez" class="btnsAcoes textoUniversais">Status</div>
-					<div id="BtnExit" class="btnsAcoes textoUniversais" onclick="AbrirPopPainel()">Fechar</div>
-				</div>
-			</div>
 
+			</div>
+			<!-- Div onde fica os botoes atacar, defender ... -->
+			<div id="DivAcoes">
+					<div id="BtnAtk" class="btnsAcoes textoUniversais" onclick="PlyerAtacar()">Atacar</div>
+					
+					<div id="BtnDef" class="btnsAcoes textoUniversais" onclick="PlyerDefender()">Defender</div>
+					
+					<div id="BtnSkills" class="btnsAcoes textoUniversais" onclick="">Habilidades</div>
+					
+					<div id="BtnItems" class="btnsAcoes textoUniversais" onclick="PlyerItems('BtnItems')">Items</div>
+					
+					<div id="BtnEfeitos" class="btnsAcoes textoUniversais" onclick="PlyerStatus('BtnEfeitos')">Efeitos</div>
+					
+					<div id="BtnExit" class="btnsAcoes textoUniversais" onclick="AbrirPopPainel()">Fechar</div>
+			</div>
+			<!-- pop onde fica os perfies de todos em campo -->
 			<div id="SegundaRow" class="PopRows">
 				<div id="DivTrocaPerfies">
 					<div id="trocaInimigo" class="DivsTrocar2" onclick="perfilEmCampo('doBot')"> <=MONTROS </div>
@@ -143,10 +151,25 @@
 						<!-- DIVS BarsName 1 a 6 -->
 						<!-- DIVS BarsHP 1 a 6 -->
 				</div>
-			</div> <!-- FECHAMENTO DIV DA 2 ROW DO POP -->
+			</div>
+
+			<div id="DivItems" class="PopRows oculto">
+				<div id="BtnVoltarAcoes" class="btnsAcoes textoUniversais" onclick="PlyerItems('BtnVoltarAcoes')">Voltar</div>
+			</div>
+			
+			<div id="DivEfeitos" class="PopRows oculto">
+				<div id="BoxEfeitos" class="">
+					<div id="" class="divEfeitos">
+						<div id="" class="EfeitosIcon"></div>
+						<div id="" class="EfeitosDescricao"></div>
+					</div>
+				</div>
+				
+				<div id="BtnVoltarAcoes" class="btnsAcoes textoUniversais" onclick="PlyerStatus('BtnVoltarAcoes')">Voltar</div>
+			</div>
+			
 		</div> <!-- FECHAMENTO DIV DA BOX DO POP -->
 	</div> <!-- FECHAMENTO DIV DO FUNDO DO POP -->
-
 	<div id="TelaBatalha" class="tela oculto">
 		<!-- 1ª Linha: Perfil Inimigo -->
 		<div id="RowInimigo" class="">

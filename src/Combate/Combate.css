@@ -23,7 +23,7 @@ POP PAINEL
 	height: 95%; width: 90%;
   background-color: #333333b2;
   display: grid; z-index: 3;
-  grid-template-rows: 50% 50%;
+  grid-template-rows: 30% 20% 50%;
 }
 .PopRows{
   height: 100%; width: 100%;
@@ -31,7 +31,7 @@ POP PAINEL
 /*- ROW DO TOP-*/
 #PrimeiraRow {
   grid-row: 1; padding: 1%;
-  display: grid; grid-template-rows: 59% 41%;
+  display: grid; grid-template-rows: 100%;
 }
 #DivImagemEStatus{
   height: 100%; width: 100%;
@@ -81,7 +81,6 @@ POP PAINEL
 	height: 100%; width: 100%;
 	background-color: #3F88C5;
 }
-
 #RowEfeitos{
 	background-color: #2A2D34;
 	grid-row: 5 / 7; display: grid;
@@ -95,6 +94,7 @@ POP PAINEL
 	background-color: #4e4f52;
 }
 
+/*- ROW DO MEIO-*/
 #DivAcoes{
   height: 100%; width: 100%;
   grid-row: 2; display: grid; 
@@ -106,6 +106,11 @@ POP PAINEL
 	height: 100%; width: 100%;
 	border: 1px solid #C2C18A;
 	background-color: #2A2D34;
+}
+.btnsAcoesATK {
+	height: 100%; width: 100%;
+	border: 1px solid #C2C18A;
+	background-color: #31384a;
 }
 
 #DivTrocaPerfies{
@@ -128,7 +133,7 @@ POP PAINEL
 
 /*- BOX PERFIL DE TODOS EM CAMPO-*/
 #SegundaRow { 
-  grid-row: 2; gap: 1%; padding: 3%; padding-top: 1%;
+  grid-row: 3; gap: 1%; padding: 3%; padding-top: 1%;
   display: grid; grid-template-rows: 15% 85%;
 }
 #DivPerfies{
@@ -167,6 +172,48 @@ POP PAINEL
 	flex: 1; border-top: 0.5px solid hwb(59 54% 24%);
   display: flex; font-size: 16px;
   justify-content: center; align-items: center;
+}
+
+#DivItems, #DivEfeitos {
+  height: 100%; width: 100%;
+  grid-row: 2 / 4;
+}
+#DivEfeitos {
+	display: grid; gap: 3%;
+	grid-template-rows: 90% 10%;
+}
+#BoxEfeitos {
+	grid-row: 1; 
+	height: 100%; width: 100%; 
+	padding: 2%;
+	border: 1px solid hwb(59 54% 24%);
+	display: grid; gap: 1%;
+	grid-auto-rows: 15vh; 
+	box-sizing: border-box;
+	overflow-y: auto;
+  overflow-x: hidden;
+}
+.divEfeitos {
+	height: 100%; width: 100%;
+	background-color: #3F434E;
+	display: grid; 
+	grid-template-columns: 30% 70%;
+}
+.EfeitosIcon {
+	grid-column: 1; background-size: cover;
+	height: 100%; width: 100%;
+	border: 1px solid hwb(59 54% 24%);
+	display: flex; font-size: 22px; padding: 2%;
+	align-items: end; justify-content: right;
+	
+}
+.EfeitosDescricao{
+	grid-column: 2; 
+	height: 100%; width: 100%;
+}
+
+#BtnVoltarAcoes{
+	grid-row: 2;
 }
 /*----------------------------------------
 TELA BATALHA

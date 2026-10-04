@@ -1,6 +1,7 @@
 let numero; let colocaremCampo = "nao";
 let CartaAserExcluida; let PopCorpotamento = "desativado";
 let abaAtivaPerfil = "doBot";
+let btnAtk = "Atacar"; let IdentificadorUnico = '';
 
 /*=========================================
          OBJETOS 
@@ -21,25 +22,52 @@ window.CentralImagens = {
 	  'Morcego': { tipo: 'Besta', imagem: '/Imagens/Deck-Druida/BatCard.png' },
 		'Goblin': { Posicao: '2 e 3 linha', imagem: '/Imagens/Mobs/GoblinCard.png' },
 		'GoblinArcher': { Posicao: '1 e 2 linha', imagem: '/Imagens/Mobs/GoblinArcherCard.png' },
+	},
+	iconEfeitos: {
+		'Poison': '/Imagens/EfeitosIcons/PoisonEfeito.png',
+		'Burn': '/Imagens/EfeitosIcons/burnEfeito .png',
 	}
 }
-window.dadosMobs = {
-	'Goblin': { HPMax: 30, HPminimo: 23, dano: 6, def: 10,},
-	'GoblinArcher': { HPMax: 23, HPminimo: 18, dano: 6, def: 10,},
+window.DadosMobsCards = {
+	IA: {
+		'Goblin': { HPMax: 30, HPminimo: 23, dano: 6 },
+		'GoblinArcher': { HPMax: 23, HPminimo: 18, dano: 6 },
+	},
+	Player: {
+		'Morcego': { HPMax : 20, dano: 4 },
+		'Lobo': { HPMax : 28, dano: 6 },
+		'Urso': { HPMax : 35, dano: 8 },
+		'Dragao': { HPMax : 60, dano: 10 },
+	}
 }
 
 window.CartasEmCampoStatus = {
-	PosicaoT1: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT2: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT3: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT4: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT5: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT6: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT7: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT8: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-	PosicaoT9: { nome: '', HP: 0, HPMax: 0, Energia: 1 }
+	IA: {
+		PosicaoT1: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT2: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT3: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT4: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT5: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT6: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT7: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT8: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoT9: { nome: '', HP: 0, HPMax: 0, Energia: 1 }
+	},
+	Player: {
+		PosicaoTP1: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP2: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP3: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP4: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP5: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP6: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP7: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP8: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
+		PosicaoTP9: { nome: '', HP: 0, HPMax: 0, Energia: 1 }
+	}
 };
-
+window.EfeitosTodosEmCampo = {
+	Mob0: { 'Burn': 3, 'Poison': 2 },
+}
 window.DecksMobs = {
 	Goblins: ['Goblin', 'GoblinArcher']
 };
@@ -57,8 +85,9 @@ window.tabuleiroPE = [
 ]
 
 /*=========================================
-         FUNÇÕES 
+         FUNÇÕES GERAIS
 ==========================================*/
+/* Funcoes focadas na monstagem do baralho da Ia e das carats em mao do player */
 window.AbrirPopPainel = function () {
   const POP = document.getElementById("PopPainelfundo");
   if (PopCorpotamento == "desativado") {
@@ -66,8 +95,14 @@ window.AbrirPopPainel = function () {
     PopCorpotamento = "ativado";
 
   } else if (PopCorpotamento == "ativado") {
-    POP.classList.add("oculto");
-    PopCorpotamento = "desativado";
+		
+		if(btnAtk == 'Atacar') {
+			POP.classList.add("oculto");
+    	PopCorpotamento = "desativado";
+		} else {
+		
+		}
+    
   }
 }
 window.montarDeck = function () {
@@ -109,12 +144,12 @@ window.MontarDeckEnimigo = function () {
 			let coluna = Pindex % 3;
 			tabuleiroPE[linha][coluna] = ID; 
 			
-			let Max = window.dadosMobs[ID].HPMax;
-			let Min = window.dadosMobs[ID].HPminimo;
+			let Max = window.DadosMobsCards.IA[ID].HPMax;
+			let Min = window.DadosMobsCards.IA[ID].HPminimo;
 			let HPsorteado = Math.floor(Math.random() * (Max - Min)) + Min;
 
 			let chavePosicao = `PosicaoT${PRandom}`;
-		  window.CartasEmCampoStatus[chavePosicao] = {
+		  window.CartasEmCampoStatus.IA[chavePosicao] = {
 		    nome: ID,
 		    HP: HPsorteado,
 		    HPMax: HPsorteado,
@@ -132,21 +167,38 @@ window.MontarDeckEnimigo = function () {
   }
 	AtualizarHPs();
 }
+
+/* Função para atualizar os Hps de todos em campo */
 window.AtualizarHPs = function() {
 	for(let i = 1; i <= 9; i++) {
 		const chavePosicao = document.getElementById(`PosicaoT${i}`);
 		const indexPosicao = `PosicaoT${i}`;
-		if(CartasEmCampoStatus[indexPosicao].nome != '') {
-			const dadosP = CartasEmCampoStatus[indexPosicao];
+		if(CartasEmCampoStatus.IA[indexPosicao].nome != '') {
+			const dadosP = CartasEmCampoStatus.IA[indexPosicao];
 			chavePosicao.innerText = ` HP:\n ${dadosP.HP}/ ${dadosP.HPMax}`;
 		} else{
 			chavePosicao.innerText = '';
 		}
 	}
+
+	tabuleiroP.forEach((hpSlot, index) => {
+		if (hpSlot !== '') {
+		  const numPosicao = index + 1;
+		  const indexPosicao = `PosicaoTP${numPosicao}`;
+		  const chavePosicao = document.getElementById(indexPosicao);
+		  const dadosP = CartasEmCampoStatus.Player[indexPosicao];
+		
+		  if (chavePosicao && dadosP) {
+		    chavePosicao.innerText = ` HP:\n ${dadosP.HP}/ ${dadosP.HPMax}`;
+		  }
+		}
+	});
 }
 
+/* Função que cria os perfies dos mobs em campo, criando suas fotos, hp e nomes */
 window.perfilEmCampo = function(aba) {
-	let num = 1; let PerfilLoop;
+  let num = 1; 
+  let PerfilLoop;
   const btnMobs = document.getElementById('trocaInimigo');
   const btnPlayer = document.getElementById('trocaPlayer');
   const DivPerfilPai = document.getElementById("DivPerfies");
@@ -163,7 +215,7 @@ window.perfilEmCampo = function(aba) {
   } else { 
     btnMobs.className = "DivsTrocar2";
     btnPlayer.className = "DivsTrocar"; 
-  	PerfilLoop = tabuleiroPE.flat();
+    PerfilLoop = tabuleiroPE.flat();
   }
 	
   PerfilLoop.forEach((Perfil, index) => {
@@ -187,34 +239,40 @@ window.perfilEmCampo = function(aba) {
       HPbox.id = `idbarHP${num}`;
       HPbox.className = "BarsHP";
 
-			let numeroDaPosicao = index + 1;
+      let numeroDaPosicao = index + 1;
       let stringHP = "HP 10/ 10";
 
       if (abaAtivaPerfil === "doBot") {
         let chavePosicao = `PosicaoT${numeroDaPosicao}`;
-        let statusMob = window.CartasEmCampoStatus[chavePosicao];
+        let statusMob = window.CartasEmCampoStatus.IA[chavePosicao];
 
         if (statusMob && statusMob.nome !== '') {
           stringHP = `HP ${statusMob.HP}/ ${statusMob.HPMax}`;
         }
       } else {
-        //lógica para o HP do Player, aqui!
-        stringHP = "HP 10/ 10"; 
+        let chavePosicao = `PosicaoTP${numeroDaPosicao}`;
+        let statusMobP = window.CartasEmCampoStatus.Player[chavePosicao];
+
+        if (statusMobP && statusMobP.nome !== '') {
+          stringHP = `HP ${statusMobP.HP}/ ${statusMobP.HPMax}`;
+        }
       }
+			
       HPbox.innerText = stringHP;
       BoxPerfilPai.appendChild(HPbox);
-			
+      
       let caminhoimg = CentralImagens.ImagensSemFundo[Perfil];
-			
-			if (Namebox) {
-        Namebox.innerText = Perfil.replace(/([A-Z])/g, ' \$1').trim();
-			}
+      
+      if (Namebox) {
+        Namebox.innerText = Perfil.replace(/([A-Z])/g, ' $1').trim();
+      }
       if (imgbox) imgbox.style.backgroundImage = `url('${caminhoimg}')`;
       
       num++;
     }
   });
 };
+/* função que cria as cartas da mao do player ao iniciar o combate */
 window.CicloCartas = function () {
   const MaoPlayer = document.getElementById("RowPlayer");
   MaoPlayer.innerHTML = '';
@@ -239,6 +297,8 @@ window.CicloCartas = function () {
     MaoPlayer.appendChild(divCard);
   }
 };
+
+/* função CardNoTabuleiro, serve para colcar a carta em campo e apagar ela da mão do palyer */
 window.CardSelecionado = function (idCard) {
   const AllCards = document.querySelectorAll('#RowPlayer .CardsSlots');
   AllCards.forEach(card => card.classList.remove('CardSelecionado'));
@@ -261,7 +321,7 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 	const DisplayImg = document.getElementById("BoxImg");
 	const DisplayNome = document.getElementById("RowNome");
 	const DisplayTipo = document.getElementById("RowTipo");
-	//const DisplayHP = document.getElementById("hptext");
+	const DisplayHP = document.getElementById("hptext");
 	//const DisplayEnergia = document.getElementById("Energiatext");
 
   if (!CardPosition) {
@@ -286,7 +346,21 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
       let indexPosition = +IdBoxTabuleiro - 1;
       tabuleiroP[indexPosition] = IdCardMao;
 
+			let IDslot = Idslot;
+			let Identif = IdCardMao;
+			let HP = DadosMobsCards.Player[Identif].HPMax;
+			
+			CartasEmCampoStatus.Player[IDslot] = {
+			    nome: Identif,
+			    HP: HP,
+			    HPMax: HP,
+			    Energia: 1
+			};
+			
+			AtualizarHPs();
+
       slotTabuleiro.style.backgroundImage = `url('${caminhoIMG}')`;
+			slotTabuleiro.dataset.IdUnico = `Mob${indexPosition}`;
 
       const divaApagar = CartaAserExcluida;
 
@@ -299,17 +373,35 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
     } else {
       console.log("Limite atingido");
     }
-  } else {
+  } 
+	else {
     let partes = Idslot.split("PosicaoTP");
     let IdBoxTabuleiro = partes[1];
     let indexPosition = +IdBoxTabuleiro - 1;
 		let indexCarta = tabuleiroP[indexPosition];
-		let indexImagem = CentralImagens.ImagensComFundo[indexCarta].imagem;
+		let dadosCarta = CentralImagens.ImagensComFundo[indexCarta];
+		let indexImagem = dadosCarta ? dadosCarta.imagem : '';
 		
     if (tabuleiroP[indexPosition] !== '') {		
-			DisplayImg.style.backgroundImage = `url('${indexImagem}')`;
+			let IDslot = Idslot;
+			let HPAtual = CartasEmCampoStatus.Player[IDslot].HP;
+			let HPmaximo = CartasEmCampoStatus.Player[IDslot].HPMax;
+
+			const dadosComFundo = CentralImagens.ImagensComFundo[indexCarta];
+			
+			if (dadosComFundo && dadosComFundo.imagem) {
+			    DisplayImg.style.backgroundImage = `url('${dadosComFundo.imagem}')`;
+			} else {
+			    DisplayImg.style.backgroundImage = 'none';
+			}
+			
 			DisplayNome.innerText = indexCarta;
-			DisplayTipo.innerText = CentralImagens.ImagensComFundo[indexCarta].tipo;
+			DisplayHP.innerText = ` HP: ${HPAtual}/ ${HPmaximo}`;
+
+			DisplayTipo.innerText = (dadosComFundo && dadosComFundo.tipo) ? dadosComFundo.tipo : "Monstro";
+
+			IdentificadorUnico = slotTabuleiro.dataset.IdUnico || "vazio";
+			
 			window.AbrirPopPainel();
     } else {
       console.log("Selecionar uma carta");
@@ -317,3 +409,85 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
   }
 	perfilEmCampo();
 };
+
+/*======================================================
+  FUNÇÕES DE AÇÕES COMO ATACAR, USAR SKILL E ITEMS E ETC
+=======================================================*/
+window.PlyerAtacar = function() {
+	const BtnAtacar = document.getElementById('BtnAtk');
+	if(BtnAtacar.innerText == 'Atacar') {
+		BtnAtacar.innerText = 'Cancelar';
+		btnAtk = BtnAtacar.innerText;
+		BtnAtacar.classList.remove("btnsAcoes");
+		BtnAtacar.classList.add("btnsAcoesATK");
+	} else {
+		BtnAtacar.innerText = 'Atacar';
+		btnAtk = BtnAtacar.innerText;
+		BtnAtacar.classList.remove("btnsAcoesATK");
+		BtnAtacar.classList.add("btnsAcoes");
+	}
+}
+window.PlyerDefender = function() {
+	const BtnAtacar = document.getElementById('BtnAtk');
+	if(btnAtk == 'Atacar') {
+		alert('Pode defender');
+	} else {
+		
+	}
+}
+window.PlyerItems = function(btn) {
+	const divAcoes = document.getElementById('DivAcoes');
+	const divPerfies = document.getElementById('SegundaRow');
+	const divItems = document.getElementById('DivItems');
+	
+	if(btn == 'BtnItems') {
+		divAcoes.classList.add('oculto');
+		divPerfies.classList.add('oculto');
+		divItems.classList.remove('oculto');
+	} 
+	else if(btn == 'BtnVoltarAcoes') {
+		divAcoes.classList.remove('oculto');
+		divPerfies.classList.remove('oculto');
+		divItems.classList.add('oculto');
+	}
+}
+window.PlyerStatus = function(btn) {
+	const divAcoes = document.getElementById('DivAcoes');
+	const divPerfies = document.getElementById('SegundaRow');
+	const divEfeitos = document.getElementById('DivEfeitos');
+	const BoxDeEfeitos = document.getElementById('BoxEfeitos');
+	
+	if(btn == 'BtnEfeitos') {
+		divAcoes.classList.add('oculto');
+		divPerfies.classList.add('oculto');
+		divEfeitos.classList.remove('oculto');
+
+		BoxDeEfeitos.innerHTML = '';
+		let Ident = IdentificadorUnico;
+
+
+		Object.keys(EfeitosTodosEmCampo[Ident] || {}).forEach(objetos =>{
+			let efeitosNome = objetos; 
+
+			const EfeitoBox = document.createElement("div");
+			EfeitoBox.classList.add('divEfeitos');
+			BoxDeEfeitos.appendChild(EfeitoBox);
+
+			const EfeitoImg = document.createElement("div");
+			let ImgCaminho = window.CentralImagens.iconEfeitos[efeitosNome];
+			EfeitoImg.classList.add('EfeitosIcon', 'imagemStyle');
+			EfeitoImg.innerText = EfeitosTodosEmCampo[Ident][efeitosNome];
+			EfeitoImg.style.backgroundImage = `url('${ImgCaminho}')`;
+			EfeitoBox.appendChild(EfeitoImg);
+
+			const EfeitoDescricao = document.createElement("div");
+			EfeitoDescricao.classList.add('EfeitosDescricao');
+			EfeitoBox.appendChild(EfeitoDescricao);
+		})
+	} 
+	else if(btn == 'BtnVoltarAcoes') {
+		divAcoes.classList.remove('oculto');
+		divPerfies.classList.remove('oculto');
+		divEfeitos.classList.add('oculto');
+	}
+}
