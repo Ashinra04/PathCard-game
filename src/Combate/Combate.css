@@ -1,11 +1,51 @@
 /*----------------------------------------
 cores HEX: 
 #2A2D34 
+#31384a
 #E94F37 
 #C2C18A 
 #3F88C5 
 #FFFFFF
+-------------------------------------------*/
 
+/*----------------------------------------
+					ANIMAÇÕES 
+-------------------------------------------*/
+@keyframes chacoalhar {
+	0% { transform: translate(0, 0);}
+	10% { transform: translate(5px, 0);}
+	20% { transform: translate(-5px, 0);}
+	30% { transform: translate(4px, 0);}
+	40% { transform: translate(-4px, 0);}
+	50% { transform: translate(3px, 0);}
+	60% { transform: translate(-2px, 0);}
+	70% { transform: translate(2px, 0);}
+	80% { transform: translate(-1px, 0);}
+	100% { transform: translate(0, 0);}
+}
+@keyframes IAatacar {
+	0% { transform: translate(0, 1px);}
+	20% { transform: translate(0, 2px);}
+	40% { transform: translate(0, 4px);}
+	60% { transform: translate(0, 1px);}
+	70% { transform: translate(0, 2px);}
+	80% { transform: translate(0, 4px);}
+	90% { transform: translate(0, 2px);}
+	100% { transform: translate(0, 0);}
+}
+@keyframes PlyerAtacar {
+	0% { transform: translate(0, -5px);}
+	20% { transform: translate(0, -3px);}
+	40% { transform: translate(0, 1px);}
+	60% { transform: translate(0, -5px);}
+	80% { transform: translate(0, -3px);}
+	90% { transform: translate(0, 1px);}
+	100% { transform: translate(0, 0);}
+}
+.AnimChacoalhar {
+	animation: chacoalhar 1.5s linear;
+}
+/*----------------------------------------
 POP PAINEL
 -------------------------------------------*/
 #PopPainelfundo {
@@ -15,7 +55,7 @@ POP PAINEL
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 2;
+	z-index: 5;
 	display: flex; justify-content: center;
 	align-items: center;
 }
@@ -38,17 +78,25 @@ POP PAINEL
   grid-row: 1; display: grid;
 	grid-template-columns: 45% 55%;
 }
-#BoxImg {
+#BoxImg, #BoxImgSkill {
 	height: 100%; width: 100%;
 	grid-column: 1;
 	background-size: 100% 100%;
 	background-position: top;
 }
-#BoxStts {
+#BoxStts{
 	height: 100%; width: 100%;
 	background-color: #2A2D34;
 	grid-column: 2; gap: 1%; padding: 1%;
 	display: grid; grid-template-rows: repeat(6, 1fr);
+}
+#BoxSttSkill{
+	height: 100%; width: 100%;
+	background-color: #2A2D34;
+	padding-left: 1%; padding-top: 3%;
+	display: flex;
+	justify-content: center; font-size: 16px;
+	box-sizing: border-box;
 }
 .RowsStatus {
 	height: 100%; width: 100%;
@@ -83,21 +131,23 @@ POP PAINEL
 }
 #RowEfeitos{
 	background-color: #2A2D34;
+	border: 1px solid #C2C18A;
 	grid-row: 5 / 7; display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: 48% 48%; gap: 2%;
 	overflow: hidden; padding: 1%;;
 }
 .BoxsEfeitos {
+	background-size: cover;
 	height: 100%; width: 100%;
 	border: 0.5px solid #3F88C5;
 	background-color: #4e4f52;
 }
 
 /*- ROW DO MEIO-*/
-#DivAcoes{
+#DivAcoes, #DivSkills{
   height: 100%; width: 100%;
-  grid-row: 2; display: grid; 
+  grid-row: 2; display: grid;
 	padding: 2%; gap: 1%; padding-bottom: 1%;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: repeat(3, 1fr);
@@ -106,6 +156,9 @@ POP PAINEL
 	height: 100%; width: 100%;
 	border: 1px solid #C2C18A;
 	background-color: #2A2D34;
+}
+.btnsAcoesAtivado {
+	background-color: #31384a;
 }
 .btnsAcoesATK {
 	height: 100%; width: 100%;
@@ -169,7 +222,7 @@ POP PAINEL
 }
 .BarsHP{
 	grid-column: 2; grid-row: 2;
-	flex: 1; border-top: 0.5px solid hwb(59 54% 24%);
+	flex: 1; border-top: 0.5px solid #C2C18A;
   display: flex; font-size: 16px;
   justify-content: center; align-items: center;
 }
@@ -186,7 +239,7 @@ POP PAINEL
 	grid-row: 1; 
 	height: 100%; width: 100%; 
 	padding: 2%;
-	border: 1px solid hwb(59 54% 24%);
+	border: 1px solid #C2C18A;
 	display: grid; gap: 1%;
 	grid-auto-rows: 15vh; 
 	box-sizing: border-box;
@@ -196,6 +249,7 @@ POP PAINEL
 .divEfeitos {
 	height: 100%; width: 100%;
 	background-color: #3F434E;
+	border: 1px solid hwb(59 54% 24%);
 	display: grid; 
 	grid-template-columns: 30% 70%;
 }
@@ -356,7 +410,7 @@ TELA BATALHA
 #BoxInfos {
   grid-row: 3; width: 100%; height: 100%;
   display: grid; align-items: end;
-  grid-template-columns: 17% 40% 25% 18%;
+  grid-template-columns: 20% 40% 40%;
   gap: 0.1%; padding: 1%;
 }
 
@@ -373,28 +427,21 @@ TELA BATALHA
   height: 100%;
   grid-column: 1;
   border: 2px solid #3F88C5;
-  border-radius: 20% 20% 0 0;
+  border-radius: 10% 0% 10% 10%;
   font-size: clamp(2rem, 3vw, 3rem);
   background-color: #01a9d3;
 }
 
 #BoxTurno {
   width: 100%;
-  height: 80%;
+  height: 90%;
   grid-column: 2;
-  border: 2px solid #3F88C5;
+  border: 1px solid #3F88C5;
 }
 
-#BoxTime {
+#BtnEncerrarTurno {
   width: 100%;
-  height: 80%;
+  height: 90%;
   grid-column: 3;
-  border: 2px solid #3F88C5;
-}
-
-#BoxReinicarMao {
-  width: 100%;
-  height: 80%;
-  grid-column: 4;
-  border: 2px solid #3F88C5;
+  border: 1px solid #C2C18A;
 }

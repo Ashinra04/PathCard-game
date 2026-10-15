@@ -14,24 +14,27 @@
 	</div>
 
 	<div id="TelaSelect" class="tela oculto">
-		<div id="SelectTitle">SLECIONE SEU PERSONAGEM</div>
-		<div id="iconCharacters" class="">
-			<div id="seleçãoP1" class="SeleçãoIcone2"></div>
-			<div id="seleçãoP2" class="SeleçãoIcone"></div>
-			<div id="seleçãoP3" class="SeleçãoIcone"></div>
-			<div id="seleçãoP4" class="SeleçãoIcone"></div>
+		<div id="CojuntoTitleBoxs">
+			<div id="SelectTitle">SLECIONE SEU PERSONAGEM</div>
+			<div id="iconCharacters" class="">
+				<div id="seleçãoP1" class="SeleçãoIcone2"></div>
+				<div id="seleçãoP2" class="SeleçãoIcone"></div>
+				<div id="seleçãoP3" class="SeleçãoIcone"></div>
+				<div id="seleçãoP4" class="SeleçãoIcone"></div>
+			</div>
 		</div>
 
 		<div id="TSpersoInfos"></div>
 
 		<div id="BoxPersonagem">
-			<div id="ColumnCentral">
-				<div id="iconPerso" class="">1</div>
-				<div id="botaoSelect" class="btnGlobal" onclick="montarDeck(); mudarTela('TelaSkillsEPassivas')">
-					ESCOLHER</div>
-			</div>
-			<div id="btnProx" class="" onclick="SelecaoPerso('avancar')">></div>
 			<div id="btnAnter" class="" onclick="SelecaoPerso('voltar')">z</div>
+			
+			<div id="iconPerso" class="">1</div>
+			
+			<div id="btnProx" class="" onclick="SelecaoPerso('avancar')">></div>
+		</div>
+		
+		<div id="botaoSelect" class="btnGlobal" onclick="montarDeck(); mudarTela('TelaSkillsEPassivas')"> ESCOLHER
 		</div>
 	</div>
 
@@ -91,16 +94,21 @@
 			<div id="PrimeiraRow" class="PopRows">
 				<div id="DivImagemEStatus">
 					<div id="BoxImg" class="imagemStyle"></div>
+					<div id="BoxImgSkill" class="imagemStyle oculto"></div>
+					
 					<div id="BoxStts">
 						<div id="RowNome" class="RowsStatus textoUniversais">NOME</div>
 						<div id="RowTipo" class="RowsStatus textoUniversais">TIPO</div>
 						
+						<!-- barra de HP -->
 						<div id="RowHP" class="RowsStatus textoUniversais">
 							<div id="hptext" class="textoUniversais">HP: 10/ 10</div>
 							<div id="hpbar">
 								<div id="hpfill"></div>
 							</div>
 						</div>
+						
+						<!-- barra de energia -->
 						<div id="RowEnergia" class="RowsStatus textoUniversais">
 							<div id="Energiatext" class="textoUniversais">Energia: 10/ 10</div>
 							<div id="energiabar">
@@ -108,35 +116,32 @@
 							</div>
 						</div>
 						<div id="RowEfeitos" class="RowsStatus">
+							<!-- DoT da carta fica aqui -->
 							<div id="efeito1" class="BoxsEfeitos"></div>
-							<div id="efeito2" class="BoxsEfeitos"></div>
-							<div id="efeito3" class="BoxsEfeitos"></div>
-							<div id="efeito4" class="BoxsEfeitos"></div>
-							<div id="efeito5" class="BoxsEfeitos"></div>
-							<div id="efeito6" class="BoxsEfeitos"></div>
-							<div id="efeito7" class="BoxsEfeitos"></div>
-							<div id="efeito8" class="BoxsEfeitos"></div>
-							<div id="efeito9" class="BoxsEfeitos"></div>
-							<div id="efeito10" class="BoxsEfeitos"></div>
-							<div id="efeito11" class="BoxsEfeitos"></div>
 						</div>
+					</div>
+					<div id="BoxSttSkill" class="oculto">
+						
 					</div>
 				</div>
 
 			</div>
 			<!-- Div onde fica os botoes atacar, defender ... -->
 			<div id="DivAcoes">
-					<div id="BtnAtk" class="btnsAcoes textoUniversais" onclick="PlyerAtacar()">Atacar</div>
+					<div id="BtnAtk" class="btnsAcoes textoUniversais" onclick="PlyerAtacar(this)">Atacar</div>
 					
 					<div id="BtnDef" class="btnsAcoes textoUniversais" onclick="PlyerDefender()">Defender</div>
 					
-					<div id="BtnSkills" class="btnsAcoes textoUniversais" onclick="">Habilidades</div>
+					<div id="BtnSkills" class="btnsAcoes textoUniversais" onclick="PlyerSkills('btnSkills')">Habilidades</div>
 					
 					<div id="BtnItems" class="btnsAcoes textoUniversais" onclick="PlyerItems('BtnItems')">Items</div>
 					
 					<div id="BtnEfeitos" class="btnsAcoes textoUniversais" onclick="PlyerStatus('BtnEfeitos')">Efeitos</div>
 					
-					<div id="BtnExit" class="btnsAcoes textoUniversais" onclick="AbrirPopPainel()">Fechar</div>
+					<div id="BtnExit" class="btnsAcoes textoUniversais" onclick="AbrirPopPainel('Esconder')">Fechar</div>
+			</div>
+			<div id="DivSkills" class="oculto">
+					<!-- divs de skills sendo 5 ao todo e 1 de btn voltar -->
 			</div>
 			<!-- pop onde fica os perfies de todos em campo -->
 			<div id="SegundaRow" class="PopRows">
@@ -186,10 +191,10 @@
 		<div id="RowTabuleiro" class="">
 			<!-- Grid do Inimigo (Linha 1) -->
 			<div id="PosicoesEnemy" class="">
-				<div id="PosicaoT1" class="PosiçõesT">HP:10/ 10</div>
-				<div id="PosicaoT2" class="PosiçõesT">HP:10/ 10</div>
-				<div id="PosicaoT3" class="PosiçõesT">HP:10/ 10</div>
-				<div id="PosicaoT4" class="PosiçõesT">HP:10/ 10</div>
+				<div id="PosicaoT1" class="PosiçõesT"></div>
+				<div id="PosicaoT2" class="PosiçõesT"></div>
+				<div id="PosicaoT3" class="PosiçõesT"></div>
+				<div id="PosicaoT4" class="PosiçõesT"></div>
 				<div id="PosicaoT5" class="PosiçõesT"></div>
 				<div id="PosicaoT6" class="PosiçõesT"></div>
 				<div id="PosicaoT7" class="PosiçõesT"></div>
@@ -217,8 +222,7 @@
 		<div id="BoxInfos" class="">
 			<div id="BoxEnergia" class="txt">4</div>
 			<div id="BoxTurno" class="txt">Turno: Player</div>
-			<div id="BoxTime" class="txt">00:00</div>
-			<div id="BoxReinicarMao" class="txt" onclick="CicloCartas()">🔄</div>
+			<div id="BtnEncerrarTurno" class="txt" onclick="EncerrarTurno()">Encerrar Turno</div>
 		</div>
 		<!-- 4ª Linha: Mão do Player -->
 		<div id="RowPlayer" class="">
@@ -232,6 +236,8 @@
 </body>
 <script type="module" src="/src/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>
-
+<script>
+    eruda.init();
+    eruda.position({ x: 0, y: 0 });
+</script>
 </html>

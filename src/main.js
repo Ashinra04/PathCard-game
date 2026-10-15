@@ -60,7 +60,7 @@ function AtivarPopUp(botaoClicado) {
 	PopUp.classList.remove('oculto');
 	}
 
-	const containerPai = document.getElementById('BoxBaralho');
+const containerPai = document.getElementById('BoxBaralho');
 
 if (containerPai) {
   containerPai.addEventListener('click', function(event) {
