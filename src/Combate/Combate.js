@@ -63,15 +63,13 @@ window.DecksMobs = {
 /*=========================================
          ARRAYS 
 ==========================================*/
-window.Deck = ['Urso', 'Dragao', 'Lobo', 'Morcego', 'Urso', 'Dragao', 'Lobo', 'Morcego', 'Urso', 'Dragao'];
-window.cartasEMaos = ['Urso', 'Dragao', 'Lobo', 'Morcego'];
-
+window.cartasEMaos = ['Coelho', 'Sapo', 'Lobo', 'Morcego'];
 window.tabuleiroP = ['', '', '', '', '', '', '', '', ''];
 window.tabuleiroPE = [
 	['', '', ''],
 	['', '', ''],
 	['', '', ''],
-]
+];
 
 /*=========================================
         FUNÇÕES DE ANIMACOES
@@ -118,15 +116,6 @@ window.AbrirPopPainel = function (PopCorpotamento) {
 		btnAtk = 'Atacar';
 		BtnAtacar.classList.remove("btnsAcoesATK");
 		BtnAtacar.classList.add("btnsAcoes");
-  }
-}
-window.montarDeck = function () {
-  for (let index = 1; index < 10; index++) {
-    const CPosicao = document.getElementById(`${index}Carta`);
-    const indexCarta = window.Deck[index];
-    const indexImagem = window.CentralImagens.ImagensComFundo[indexCarta].imagem;
-
-    CPosicao.style.backgroundImage = `url('${indexImagem}')`;
   }
 }
 window.MontarDeckEnimigo = function () {
@@ -312,17 +301,26 @@ window.perfilEmCampo = function(aba) {
 };
 window.CicloCartas = function () {
 /* função que cria as cartas da mao do player ao iniciar o combate */
+	const CartasASortear = [...CardsPlayer];
   const MaoPlayer = document.getElementById("RowPlayer");
   MaoPlayer.innerHTML = '';
-
+	cartasEMaos.length = 0;
+	
   for (let i = 0; i < 4; i++) {
     const divCard = document.createElement("div");
     divCard.id = `SlotC${i}`;
     divCard.classList.add("CardsSlots", "imagemStyle");
-    divCard.dataset.nome = window.cartasEMaos[i];
+		
+    const indiceSorteado = Math.floor(Math.random() * CartasASortear.length);
+    const CardSelecionado = CartasASortear.splice(indiceSorteado, 1)[0];
 
+		if(CardSelecionado){
+			cartasEMaos.push(CardSelecionado)
+		}
+		
+    divCard.dataset.nome = CardSelecionado;
     let dataCard = divCard.dataset.nome;
-    let caminhoIMG = window.CentralImagens.ImagensComFundo[dataCard].imagem;
+    let caminhoIMG = window.CentralImgCardsCF.ImagensComFundo[dataCard];
 
     if (caminhoIMG) {
       divCard.style.backgroundImage = `url('${caminhoIMG}')`;
@@ -415,8 +413,11 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 			};
 			
 			AtualizarHPs();
-
-      slotTabuleiro.style.backgroundImage = `url('${caminhoIMG}')`;
+			
+			if(caminhoIMG){
+				slotTabuleiro.style.backgroundImage = `url('${caminhoIMG}')`;
+			}
+			
 			slotTabuleiro.dataset.IdUnico = `Mob${indexPosition}`;
 
       const divaApagar = CartaAserExcluida;
@@ -442,10 +443,10 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 			let HPAtual = CartasEmCampoStatus.Player[IDslot].HP;
 			let HPmaximo = CartasEmCampoStatus.Player[IDslot].HPMax;
 
-			const dadosComFundo = CentralImagens.ImagensComFundo[indexCarta];
+			const CaminhoImg = CentralImgCardsCF.ImagensComFundo[indexCarta];
 			
-			if (dadosComFundo && dadosComFundo.imagem) {
-			    DisplayImg.style.backgroundImage = `url('${dadosComFundo.imagem}')`;
+			if (CaminhoImg) {
+			    DisplayImg.style.backgroundImage = `url('${CaminhoImg}')`;
 			} else {
 			    DisplayImg.style.backgroundImage = 'none';
 			}
@@ -454,7 +455,7 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 			cartaAtual = indexCarta;
 			DisplayHP.innerText = ` HP: ${HPAtual}/ ${HPmaximo}`;
 
-			DisplayTipo.innerText = (dadosComFundo && dadosComFundo.tipo) ? dadosComFundo.tipo : "Monstro";
+			DisplayTipo.innerText = "Monstro";
 
 			IdentificadorUnico = slotTabuleiro.dataset.IdUnico || "vazio";
 			
@@ -794,39 +795,64 @@ window.VerificarTurnos = function(Vez) {
 	DivTurno.innerText = `Turno: ${VezdeQuem}`;
 }
 window.AcoesIA = async function() {
-	let teste = 0;
+	let VerifCartaPemCampo = 0;
 	VerificarTurnos('IA');
+	
 	tabuleiroP.forEach(nome => {
 		if (nome !== '') {
-			teste = teste + 1;
+			VerifCartaPemCampo = VerifCartaPemCampo + 1;
 		}
 	})
 
-	if(teste > 0) {
+	if(VerifCartaPemCampo > 0) {
 		const MobsList = tabuleiroPE.flat();
-		let Alvo; const AlvosPlayer = [];
-		
-		for(let i = 0; i < tabuleiroP.length; i++){
-			if(tabuleiroP[i] != '') {
-				let index = i + 1;
-				AlvosPlayer.push(index);
-			} 
-		}
-	
+		let MobAgindo;
+
+		/* percorre todos os slots/divs que tem alguma carta no vetor de posicao de monstros, e faz as ações */
 		for(let index = 0; index < MobsList.length; index++) {
 			let Num = index + 1;
+			MobAgindo = `PosicaoT${Num}`;
 			
-			if(CartasEmCampoStatus.IA[`PosicaoT${Num}`].nome != '') {
-				Alvo = `PosicaoT${Num}`;
-				let cartaAtual = CartasEmCampoStatus.IA[`PosicaoT${Num}`].nome;
-	
-		    AnimacaoAtacar(Alvo);
+			if(CartasEmCampoStatus.IA[MobAgindo].nome != '') {
 				
-				const numSortear = AlvosPlayer.length;
+				let cartaAtual = CartasEmCampoStatus.IA[MobAgindo].nome;
+				let MobInfos = DadosMobsCards.IA[cartaAtual].categoria; // 'meele' ou 'ranged'
+				
+				let AlvosValidos = [];
+
+				if (MobInfos === 'ranged') {
+					for(let i = 0; i < tabuleiroP.length; i++) {
+						if(tabuleiroP[i] != '') {
+							AlvosValidos.push(i + 1);
+						}
+					}
+				} else {
+					// Meele: Segue a hierarquia de linhas (Frente -> Meio -> Fundo)
+					let frontRow  = [1, 2, 3].filter(slotNum => tabuleiroP[slotNum - 1] !== '');
+					let middleRow = [4, 5, 6].filter(slotNum => tabuleiroP[slotNum - 1] !== '');
+					let backRow   = [7, 8, 9].filter(slotNum => tabuleiroP[slotNum - 1] !== '');
+
+					if (frontRow.length > 0) {
+						AlvosValidos = frontRow;
+					} else if (middleRow.length > 0) {
+						AlvosValidos = middleRow;
+					} else {
+						AlvosValidos = backRow;
+					}
+				}
+				
+				if (AlvosValidos.length === 0) {
+					break;
+				}
+
+		    AnimacaoAtacar(MobAgindo);
+				
+				const numSortear = AlvosValidos.length;
 				let NRandom = Math.floor(Math.random() * numSortear);
-				let NumVerificado = AlvosPlayer[NRandom];
+				let NumVerificado = AlvosValidos[NRandom];
 				
-				let PPlayer= `PosicaoTP${NumVerificado}`;
+				let PPlayer = `PosicaoTP${NumVerificado}`;
+				
 				await new Promise(resolve => setTimeout(resolve, 300));
 				AnimacaoChacoalhar(PPlayer);
 				
@@ -841,7 +867,6 @@ window.AcoesIA = async function() {
 					CartasEmCampoStatus.Player[PPlayer].nome = '';
 					CartasEmCampoStatus.Player[PPlayer].HPMax = 0;
 					CartasEmCampoStatus.Player[PPlayer].Energia = 1;
-					AlvosPlayer.splice(NRandom, 1);
 					
 					let posicao = NumVerificado - 1;
 					tabuleiroP[posicao] = '';
@@ -853,10 +878,6 @@ window.AcoesIA = async function() {
 				}
 				else {
 					AtualizarHPs();
-				}
-				
-				if(AlvosPlayer.length == 0) {
-					break;
 				}
 				
 				await new Promise(resolve => setTimeout(resolve, 1000));

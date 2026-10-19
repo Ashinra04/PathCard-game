@@ -1,9 +1,26 @@
 import './style.css';
 import './Combate/Combate.css';
 import './Combate/Combate.js';
+import './Combate/BancoDeImagens.js';
 
-let PersonagemIndex = 1;
+import { CentralImgCardsCF } from './Combate/BancoDeImagens.js';
 
+window.CentralImgCardsCF = CentralImgCardsCF;
+
+let PersonagemIndex = 0; 
+window.PersonagemEscolhido = '';
+
+const Personagens = ['Druida', 'WeaponMaster', 'SpiritMaster', 'Desconhecido'];
+
+window.DecksIniciais = {
+	Druida: 
+		['Coelho', 'Sapo', 'Morcego', 'Cobra', 'Aranha', 'Sapo', 'SNatureza', 'SFortitude', 'SCura'],
+	
+	WeaponMaster: 
+		['Sword', 'Dagger', 'Spear', 'Bow', 'Wand','Broquel', 'Sharpen', 'Repair', 'Barragem'],
+
+	SpiritMaster: []
+}
 // ==========================================
 // NAVEGAÇÃO E VALIDAÇÕES INICIAIS
 // ==========================================
@@ -19,7 +36,6 @@ window.mudarTela = function (idParaMostrar) {
       console.error("A tela " + idParaMostrar + " não foi encontrada!");
     }
 };
-
 window.SelecaoPerso = function(botao) {
 	let Personagem = document.getElementById('iconPerso');
 	let BoxPersonagem = document.getElementById(`seleçãoP${PersonagemIndex}`);
@@ -28,25 +44,56 @@ window.SelecaoPerso = function(botao) {
 	PersonagemSelecaoBoxes.forEach(Boxes =>       Boxes.classList.add('SeleçãoIcone'));
 	PersonagemSelecaoBoxes.forEach(Boxes =>       Boxes.classList.remove('SeleçãoIcone2'));
 	
-	if(botao === 'avancar') {
-		if(PersonagemIndex < 4) {
+	if(botao === 'avancar') 
+	{
+		if(PersonagemIndex < 3) {
 			PersonagemIndex++;
-			Personagem.innerText = PersonagemIndex;
+			Personagem.innerText = Personagens[PersonagemIndex];
 		}
-		else if(PersonagemIndex == 4) {
-			Personagem.innerText = 1;
-			PersonagemIndex = 1;
+		else if(PersonagemIndex == 3) {
+			PersonagemIndex = 0;
+			Personagem.innerText = Personagens[PersonagemIndex];
 		}
 	}
-	else {
-		if(PersonagemIndex > 1) {
+	else if(botao === 'voltar') 
+	{
+		if(PersonagemIndex > 0) {
 			--PersonagemIndex;
-			Personagem.innerText = PersonagemIndex;
+			Personagem.innerText = Personagens[PersonagemIndex];
 		}
-		else if(PersonagemIndex == 1) {
-			Personagem.innerText = 4;
-			PersonagemIndex = 4;
+		else if(PersonagemIndex == 0) {
+			PersonagemIndex = 3;
+			Personagem.innerText = Personagens[PersonagemIndex];
 		}
+	} else 
+	{
+		PersonagemEscolhido = Personagens[PersonagemIndex];
+		window.montarDeck();
+	}
+}
+window.montarDeck = function () {
+	for(let i = 1; i < 10; i++){
+		const CPosicao = document.getElementById(`${i}Carta`);
+		CPosicao.style.backgroundImage = '';
+	}
+	if(DecksIniciais[PersonagemEscolhido]){
+		let index = 1;
+		DecksIniciais[PersonagemEscolhido].forEach((carta) => {
+			const CPosicao = document.getElementById(`${index}Carta`);
+			
+    	//const indexCarta = window.DecksIniciais[PersonagemEscolhido][carta];
+			console.log(carta)
+			
+    	const indexImagem = window.CentralImgCardsCF.ImagensComFundo[carta];
+			
+			window.CardsPlayer.push(carta);
+
+			if(indexImagem){
+				CPosicao.style.backgroundImage = `url('${indexImagem}')`;
+			}
+    	
+			index++;
+		})
 	}
 }
 
@@ -54,7 +101,6 @@ window.DesativarPopUp = function(){
 	let PopUp = document.getElementById('PopUpskillaCards');
 	PopUp.classList.add('oculto');
 }
-
 function AtivarPopUp(botaoClicado) {
 	let PopUp = document.getElementById('PopUpskillaCards');
 	PopUp.classList.remove('oculto');
@@ -72,8 +118,6 @@ if (containerPai) {
     }
   });
 }
-
-
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
