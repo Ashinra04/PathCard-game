@@ -1,58 +1,18 @@
 // Combate.js
-import { CentralImagens, DadosMobsCards, CentralSkills } from './BancoDeImagens.js';
+import { CentralImagens, DadosMobsCards, CentralSkills, CartasEmCampoStatus, EfeitosTodosEmCampo } from './BancoDeImagens.js';
+import { PlyerAtacar, PlyerDefender, PlyerSkills, PlyerItems, PlyerStatus, controleEnergia } from './PlayerAcoes/PlayerAcoes.js';
+import { state } from './VariaviesList/Variaveis.js';
 
-let numero; let colocaremCampo = "nao";
-let CartaAserExcluida; let cartaSelecionada = '';
-let abaAtivaPerfil = "doBot"; let cartaAtual;
-let btnAtk = "Atacar"; let IdentificadorUnico = '';
-let Turnos = 1; let EnergiaPlyr = 4;
-let CartaEscolhida; let NomeDaSkill;
-let skillAtivado = 'nao';
+let numero;
+let colocaremCampo = "nao";
+let CartaAserExcluida;
+let cartaSelecionada = '';
+let abaAtivaPerfil = "doBot";
+let Turnos = 1;
 
 /*=========================================
 		 OBJETOS 
 ==========================================*/
-window.CartasEmCampoStatus = {
-	IA: {
-		PosicaoT1: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT2: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT3: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT4: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT5: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT6: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT7: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT8: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoT9: { nome: '', HP: 0, HPMax: 0, Energia: 1 }
-	},
-	Player: {
-		PosicaoTP1: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP2: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP3: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP4: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP5: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP6: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP7: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP8: { nome: '', HP: 0, HPMax: 0, Energia: 1 },
-		PosicaoTP9: { nome: '', HP: 0, HPMax: 0, Energia: 1 }
-	}
-};
-window.EfeitosTodosEmCampo = {
-	Player: {
-		Mob0: {
-			'Burn': { turnos: 2, dano: 4 },
-			'Poison': { turnos: 2, dano: 3 },
-		},
-		Mob1: {},
-		Mob2: {},
-		Mob3: {},
-		Mob4: {},
-		Mob5: {},
-		Mob6: {},
-		Mob7: {},
-		Mob8: {},
-	}
-
-}
 window.DecksMobs = {
 	Goblins: ['GoblinGuerreiro', 'GoblinArcher', 'GoblinLancer', 'GoblinMage']
 };
@@ -98,7 +58,7 @@ window.AnimacaoAtacarPlyr = function (div) {
 /*=========================================
 		 FUNÇÕES GERAIS
 ==========================================*/
-/* Funcoes focadas na montagem do baralho da Ia e das carats em mao do player */
+/* Funcoes focadas na montagem do baralho da Ia e das cartas em mao do player */
 window.AbrirPopPainel = function (PopCorpotamento) {
 	const POP = document.getElementById("PopPainelfundo");
 	const BtnAtacar = document.getElementById('BtnAtk');
@@ -109,7 +69,7 @@ window.AbrirPopPainel = function (PopCorpotamento) {
 	else if (PopCorpotamento == "Esconder") {
 		POP.classList.add("oculto");
 		BtnAtacar.innerText = 'Atacar';
-		btnAtk = 'Atacar';
+		state.btnAtk = 'Atacar';
 		BtnAtacar.classList.remove("btnsAcoesATK");
 		BtnAtacar.classList.add("btnsAcoes");
 	}
@@ -151,7 +111,7 @@ window.MontarDeckEnimigo = function () {
 			let HPsorteado = Math.floor(Math.random() * (Max - Min)) + Min;
 
 			let chavePosicao = `PosicaoT${PRandom}`;
-			window.CartasEmCampoStatus.IA[chavePosicao] = {
+			CartasEmCampoStatus.IA[chavePosicao] = {
 				nome: ID,
 				HP: HPsorteado,
 				HPMax: HPsorteado,
@@ -228,7 +188,7 @@ window.perfilEmCampo = function (aba) {
 			BoxPerfilPai.className = "boxPerfilMobs";
 			BoxPerfilPai.dataset.nome = index;
 
-			if (btnAtk == 'Cancelar' || skillAtivado == 'sim') {
+			if (state.btnAtk == 'Cancelar' || state.skillAtivado == 'sim') {
 				if (abaAtivaPerfil === "doBot") {
 					BoxPerfilPai.style.border = "1.5px solid #C2C18A";
 				}
@@ -236,14 +196,14 @@ window.perfilEmCampo = function (aba) {
 
 			DivPerfilPai.appendChild(BoxPerfilPai);
 
-			if (skillAtivado == 'sim') {
+			if (state.skillAtivado == 'sim') {
 				BoxPerfilPai.onclick = function (e) {
-					window.PlyerSkills(this);
+					PlyerSkills(this);
 				}
 			}
 			else {
 				BoxPerfilPai.onclick = function (e) {
-					window.PlyerAtacar(e);
+					PlyerAtacar(e);
 				}
 			}
 
@@ -266,7 +226,7 @@ window.perfilEmCampo = function (aba) {
 
 			if (abaAtivaPerfil === "doBot") {
 				let chavePosicao = `PosicaoT${numeroDaPosicao}`;
-				let statusMob = window.CartasEmCampoStatus.IA[chavePosicao];
+				let statusMob = CartasEmCampoStatus.IA[chavePosicao];
 
 				if (statusMob && statusMob.nome !== '') {
 					stringHP = `HP ${statusMob.HP}/ ${statusMob.HPMax}`;
@@ -274,7 +234,7 @@ window.perfilEmCampo = function (aba) {
 			} else {
 				let chavePosicao = `PosicaoTP${numeroDaPosicao}`;
 
-				let statusMobP = window.CartasEmCampoStatus.Player[chavePosicao];
+				let statusMobP = CartasEmCampoStatus.Player[chavePosicao];
 
 				if (statusMobP && statusMobP.nome !== '') {
 					stringHP = `HP ${statusMobP.HP}/ ${statusMobP.HPMax}`;
@@ -330,7 +290,7 @@ window.CicloCartas = function () {
 	}
 };
 
-/* função CardNoTabuleiro, serve para colcar a carta em campo e apagar ela da mão do palyer */
+/* função CardNoTabuleiro, serve para colcar a carta em campo e apagar ela da mão do player */
 window.CardSelecionado = function (idCard) {
 	const AllCards = document.querySelectorAll('#RowPlayer .CardsSlots');
 	AllCards.forEach(card => card.classList.remove('CardSelecionado'));
@@ -356,11 +316,12 @@ window.CardSelecionado = function (idCard) {
 		cartaSelecionada = '';
 	}
 };
+
 window.CardNoTabuleiro = function (CardPosition, Idslot) {
 	let slotTabuleiro = CardPosition;
 
 	/*passar a posicao da carta para a funcao atacarPlayer*/
-	CartaEscolhida = Idslot;
+	state.CartaEscolhida = Idslot;
 
 	let ExisteMsm = Idslot.split("PosicaoTP");
 	let NumVer = ExisteMsm[1];
@@ -373,7 +334,6 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 	const DisplayHP = document.getElementById("hptext");
 	const DisplayEfeitos = document.getElementById("RowEfeitos");
 	DisplayEfeitos.innerHTML = '';
-	//const DisplayEnergia = document.getElementById("Energiatext");
 
 	if (!CardPosition) {
 		console.error("O slot do tabuleiro não foi passado para a função!");
@@ -448,18 +408,17 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 			}
 
 			DisplayNome.innerText = indexCarta;
-			cartaAtual = indexCarta;
+			state.cartaAtual = indexCarta;
 			DisplayHP.innerText = ` HP: ${HPAtual}/ ${HPmaximo}`;
 
 			DisplayTipo.innerText = "Monstro";
 
-			IdentificadorUnico = slotTabuleiro.dataset.IdUnico || "vazio";
+			state.IdentificadorUnico = slotTabuleiro.dataset.IdUnico || "vazio";
 
-			Object.keys(EfeitosTodosEmCampo.Player[IdentificadorUnico] || {}).forEach(objetos => {
+			Object.keys(EfeitosTodosEmCampo.Player[state.IdentificadorUnico] || {}).forEach(objetos => {
 				let EfeitoNome = objetos;
 				const EfeitoBox = document.createElement("div");
 				let ImgEfeito = CentralImagens.iconEfeitos[EfeitoNome];
-				console.log(ImgEfeito)
 
 				EfeitoBox.classList.add('BoxsEfeitos', 'imagemStyle');
 				EfeitoBox.style.backgroundImage = `url('${ImgEfeito}')`;
@@ -475,267 +434,7 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 };
 
 /*======================================================
-  FUNÇÕES DE AÇÕES COMO ATACAR, USAR SKILL E ITEMS E ETC
-=======================================================*/
-window.PlyerAtacar = async function (e) {
-	const BtnAtacar = document.getElementById('BtnAtk');
-
-	if (e.id === 'BtnAtk' && EnergiaPlyr > 0) {
-		if (BtnAtacar.innerText == 'Atacar') {
-			BtnAtacar.innerText = 'Cancelar';
-			btnAtk = BtnAtacar.innerText;
-			BtnAtacar.classList.remove("btnsAcoes");
-			BtnAtacar.classList.add("btnsAcoesATK");
-			window.perfilEmCampo('doBot');
-		}
-		else {
-			if (btnAtk == 'Cancelar') {
-				BtnAtacar.innerText = 'Atacar';
-				btnAtk = BtnAtacar.innerText;
-				BtnAtacar.classList.remove("btnsAcoesATK");
-				BtnAtacar.classList.add("btnsAcoes");
-				window.perfilEmCampo('doBot');
-			}
-		}
-	}
-	else if (EnergiaPlyr > 0) {
-		if (btnAtk == 'Cancelar') {
-			const pai = e.currentTarget;
-			const indexNoArray = pai.dataset.nome;
-			const idnoarray = +indexNoArray;
-			const IdDefinitivo = idnoarray + 1;
-			const SlotNoTabuleiro = `PosicaoT${IdDefinitivo}`;
-			window.AbrirPopPainel("Esconder");
-
-			await new Promise(resolve => setTimeout(resolve, 100));
-			AnimacaoAtacarPlyr(CartaEscolhida);
-			await new Promise(resolve => setTimeout(resolve, 300));
-			AnimacaoChacoalhar(SlotNoTabuleiro);
-
-			let danoAAplicar = DadosMobsCards.Player[cartaAtual].dano;
-			let HpMonstro = CartasEmCampoStatus.IA[SlotNoTabuleiro].HP;
-
-			CartasEmCampoStatus.IA[SlotNoTabuleiro].HP = HpMonstro - danoAAplicar;
-
-			if (CartasEmCampoStatus.IA[SlotNoTabuleiro].HP <= 0) {
-				CartasEmCampoStatus.IA[SlotNoTabuleiro].HP = 0;
-				verificarMorte(SlotNoTabuleiro);
-			}
-
-			window.controleEnergia('diminuir');
-			window.AtualizarHPs();
-			window.perfilEmCampo('doBot');
-		}
-	}
-}
-window.PlyerDefender = function () {
-	const BtnAtacar = document.getElementById('BtnAtk');
-	if (btnAtk == 'Atacar' && EnergiaPlyr > 0) {
-		let mob = IdentificadorUnico;
-		if (!EfeitosTodosEmCampo.Player[mob].Protecao) {
-			EfeitosTodosEmCampo.Player[mob].Protecao = {};
-		}
-
-		EfeitosTodosEmCampo.Player[mob].Protecao = {
-			Turnos: 1,
-			Def: 20 / 100
-		};
-
-		AbrirPopPainel('Esconder');
-		window.controleEnergia('diminuir');
-	}
-}
-window.PlyerSkills = async function (btn) {
-	if (btnAtk == 'Atacar' && EnergiaPlyr > 0) {
-		const DivAcoes = document.getElementById('DivAcoes');
-		const DivSkills = document.getElementById('DivSkills');
-		const BoxImgSkill = document.getElementById('BoxImgSkill');
-		const BoxImgCarta = document.getElementById('BoxImg');
-		const BoxSttCarta = document.getElementById('BoxStts');
-		const BoxSttSkill = document.getElementById('BoxSttSkill');
-
-		let NomeCarta = CartasEmCampoStatus.Player[CartaEscolhida].nome;
-
-		if (btn === 'btnSkills') {
-			DivSkills.innerHTML = '';
-			DivAcoes.classList.add('oculto');
-			DivSkills.classList.remove('oculto');
-
-			(DadosMobsCards.Player[NomeCarta].skills || []).forEach(skillName => {
-				const divSkill = document.createElement('div');
-				divSkill.classList.add('btnsAcoes', 'textoUniversais');
-				divSkill.innerText = skillName;
-				divSkill.dataset.name = skillName;
-				divSkill.dataset.identificador = 'skill';
-
-				divSkill.onclick = function () {
-					NomeDaSkill = divSkill.dataset.name;
-					PlyerSkills(this);
-				}
-
-				DivSkills.appendChild(divSkill);
-			});
-
-			const btnVAcoes = document.createElement('div');
-			btnVAcoes.classList.add('btnsAcoes', 'textoUniversais');
-			btnVAcoes.innerText = '<= Ações';
-			btnVAcoes.onclick = function () {
-				PlyerSkills('btnVAcoes');
-			}
-
-			DivSkills.appendChild(btnVAcoes);
-		}
-		else if (btn === 'btnVAcoes') {
-			skillAtivado = 'nao';
-			window.perfilEmCampo('doBot');
-
-			DivAcoes.classList.remove('oculto');
-			DivSkills.classList.add('oculto');
-
-			BoxImgCarta.classList.remove('oculto');
-			BoxImgSkill.classList.add('oculto');
-
-			BoxSttCarta.classList.remove('oculto');
-			BoxSttSkill.classList.add('oculto');
-		}
-		else if (btn.dataset.identificador == 'skill' && EnergiaPlyr > 0) {
-			const AllSkills = document.querySelectorAll('.btnsAcoesAtivado');
-			AllSkills.forEach(skill => skill.classList.remove('btnsAcoesAtivado'));
-
-			let IDiv = btn;
-			if (IDiv) {
-				IDiv.classList.add('btnsAcoesAtivado');
-			}
-
-			let danoSkill = CentralSkills[NomeDaSkill].dano || '';
-			let custoSkill = CentralSkills[NomeDaSkill].custo || 0;
-			let descricaoSkill = CentralSkills[NomeDaSkill].descricao || 'nao tem ainda';
-
-			BoxImgCarta.classList.add('oculto');
-			BoxImgSkill.classList.remove('oculto');
-
-			BoxSttCarta.classList.add('oculto');
-			BoxSttSkill.classList.remove('oculto');
-			BoxSttSkill.innerHTML = '';
-			BoxSttSkill.innerText = `${NomeDaSkill} 
-			
-			DANO: ${danoSkill} 
-			Energia: ${custoSkill}
-			
-			Descrição: ${descricaoSkill}`;
-			skillAtivado = 'sim';
-			window.perfilEmCampo('doBot');
-		}
-		else {
-			if (skillAtivado == 'sim' && EnergiaPlyr > 0) {
-				const DivAlvo = btn;
-				const PosicaoIndex = Number(DivAlvo.dataset.nome);
-				const IndexDefinitivo = PosicaoIndex + 1;
-				const PosicaoTabu = `PosicaoT${IndexDefinitivo}`;
-				DivAcoes.classList.remove('oculto');
-				DivSkills.classList.add('oculto');
-				BoxImgCarta.classList.remove('oculto');
-				BoxImgSkill.classList.add('oculto');
-				BoxSttCarta.classList.remove('oculto');
-				BoxSttSkill.classList.add('oculto');
-
-				window.AbrirPopPainel("Esconder");
-
-				await new Promise(resolve => setTimeout(resolve, 100));
-				AnimacaoAtacarPlyr(CartaEscolhida);
-				await new Promise(resolve => setTimeout(resolve, 300));
-				AnimacaoChacoalhar(PosicaoTabu);
-
-				let danoAAplicar = CentralSkills[NomeDaSkill].dano;
-				let HpMonstro = CartasEmCampoStatus.IA[PosicaoTabu].HP;
-
-				CartasEmCampoStatus.IA[PosicaoTabu].HP = HpMonstro - danoAAplicar;
-
-				if (CartasEmCampoStatus.IA[PosicaoTabu].HP <= 0) {
-					CartasEmCampoStatus.IA[PosicaoTabu].HP = 0;
-					verificarMorte(PosicaoTabu);
-				}
-
-				skillAtivado = 'nao';
-				window.controleEnergia('diminuir');
-				window.AtualizarHPs();
-				window.perfilEmCampo('doBot');
-			}
-		}
-	}
-}
-window.PlyerItems = function (btn) {
-	const divAcoes = document.getElementById('DivAcoes');
-	const divPerfies = document.getElementById('SegundaRow');
-	const divItems = document.getElementById('DivItems');
-	if (btnAtk !== 'Cancelar') {
-		if (btn == 'BtnItems') {
-			divAcoes.classList.add('oculto');
-			divPerfies.classList.add('oculto');
-			divItems.classList.remove('oculto');
-		}
-		else if (btn == 'BtnVoltarAcoes') {
-			divAcoes.classList.remove('oculto');
-			divPerfies.classList.remove('oculto');
-			divItems.classList.add('oculto');
-		}
-	}
-}
-window.PlyerStatus = function (btn) {
-	const divAcoes = document.getElementById('DivAcoes');
-	const divPerfies = document.getElementById('SegundaRow');
-	const divEfeitos = document.getElementById('DivEfeitos');
-	const BoxDeEfeitos = document.getElementById('BoxEfeitos');
-
-	if (btnAtk !== 'Cancelar') {
-		if (btn == 'BtnEfeitos') {
-			divAcoes.classList.add('oculto');
-			divPerfies.classList.add('oculto');
-			divEfeitos.classList.remove('oculto');
-
-			BoxDeEfeitos.innerHTML = '';
-
-			Object.keys(EfeitosTodosEmCampo.Player[IdentificadorUnico] || {}).forEach(objetos => {
-				let efeitosNome = objetos;
-
-				const EfeitoBox = document.createElement("div");
-				EfeitoBox.classList.add('divEfeitos');
-				BoxDeEfeitos.appendChild(EfeitoBox);
-
-				const EfeitoImg = document.createElement("div");
-				const valorEfeito = EfeitosTodosEmCampo?.Player?.[IdentificadorUnico]?.[efeitosNome].turnos || '';
-				let ImgCaminho = CentralImagens.iconEfeitos[efeitosNome];
-
-				EfeitoImg.classList.add('EfeitosIcon', 'imagemStyle');
-				EfeitoImg.innerText = valorEfeito;
-				EfeitoImg.style.backgroundImage = `url('${ImgCaminho}')`;
-				EfeitoBox.appendChild(EfeitoImg);
-
-				const EfeitoDescricao = document.createElement("div");
-				EfeitoDescricao.innerText = efeitosNome;
-				EfeitoDescricao.classList.add('EfeitosDescricao');
-				EfeitoBox.appendChild(EfeitoDescricao);
-			})
-		}
-		else if (btn == 'BtnVoltarAcoes') {
-			divAcoes.classList.remove('oculto');
-			divPerfies.classList.remove('oculto');
-			divEfeitos.classList.add('oculto');
-		}
-	}
-}
-window.controleEnergia = function (FazerOque) {
-	const DivEnergia = document.getElementById('BoxEnergia');
-	if (FazerOque == 'diminuir') {
-		EnergiaPlyr--;
-	}
-	else if (FazerOque == 'resetar') {
-		EnergiaPlyr = 4;
-	}
-	DivEnergia.innerText = EnergiaPlyr;
-}
-/*======================================================
-  FUNÇÕES DE VERIFICAÇÃO COMO MORTE DE ALGUMA CARTA, VER SE ACABOU O COMBATE, VERIFICAÇÃO DE TURNO E ETC.
+  FUNÇÕES DE VERIFICAÇÃO COMO MORTE DE ALGUMA CARTA, ETC.
 =======================================================*/
 window.verificarMorte = function (CartaAlvo) {
 	let MobDeletar = CartaAlvo;
@@ -800,15 +499,14 @@ window.AcoesIA = async function () {
 		const MobsList = tabuleiroPE.flat();
 		let MobAgindo;
 
-		/* percorre todos os slots/divs que tem alguma carta no vetor de posicao de monstros, e faz as ações */
 		for (let index = 0; index < MobsList.length; index++) {
 			let Num = index + 1;
 			MobAgindo = `PosicaoT${Num}`;
 
 			if (CartasEmCampoStatus.IA[MobAgindo].nome != '') {
 
-				let cartaAtual = CartasEmCampoStatus.IA[MobAgindo].nome;
-				let MobInfos = DadosMobsCards.IA[cartaAtual].categoria; // 'meele' ou 'ranged'
+				let cartaAtualMob = CartasEmCampoStatus.IA[MobAgindo].nome;
+				let MobInfos = DadosMobsCards.IA[cartaAtualMob].categoria;
 
 				let AlvosValidos = [];
 
@@ -819,7 +517,6 @@ window.AcoesIA = async function () {
 						}
 					}
 				} else {
-					// Meele: Segue a hierarquia de linhas (Frente -> Meio -> Fundo)
 					let frontRow = [1, 2, 3].filter(slotNum => tabuleiroP[slotNum - 1] !== '');
 					let middleRow = [4, 5, 6].filter(slotNum => tabuleiroP[slotNum - 1] !== '');
 					let backRow = [7, 8, 9].filter(slotNum => tabuleiroP[slotNum - 1] !== '');
@@ -848,7 +545,7 @@ window.AcoesIA = async function () {
 				await new Promise(resolve => setTimeout(resolve, 300));
 				AnimacaoChacoalhar(PPlayer);
 
-				let danoAplicar = DadosMobsCards.IA[cartaAtual].dano;
+				let danoAplicar = DadosMobsCards.IA[cartaAtualMob].dano;
 				let HPlayer = CartasEmCampoStatus.Player[PPlayer].HP;
 
 				CartasEmCampoStatus.Player[PPlayer].HP = HPlayer - danoAplicar;
