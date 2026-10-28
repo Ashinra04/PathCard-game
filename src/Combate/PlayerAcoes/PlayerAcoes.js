@@ -2,7 +2,12 @@
   FUNÇÕES DE AÇÕES COMO ATACAR, USAR SKILL E ITEMS E ETC
 =======================================================*/
 import { state } from '../VariaviesList/Variaveis.js';
-import { DadosMobsCards, CentralSkills, EfeitosTodosEmCampo, CartasEmCampoStatus, CentralImagens } from '../BancoDeImagens.js';
+
+import {  EfeitosTodosEmCampo, CartasEmCampoStatus } from '../ObjetosDeDados/CartasEmCampoSts.js';
+
+import { DadosMobsCards } from '../ObjetosDeDados/BancoInfosCartas.js';
+import { CentralSkills } from '../ObjetosDeDados/BancoDeSkills.js';
+import { CentralImagens } from '../ObjetosDeDados/BancoDeimagens.js';
 
 let NomeDaSkill;
 
@@ -41,7 +46,7 @@ export async function PlyerAtacar(e) {
             await new Promise(resolve => setTimeout(resolve, 300));
             window.AnimacaoChacoalhar(SlotNoTabuleiro);
 
-            let danoAAplicar = DadosMobsCards.Player[state.cartaAtual].dano;
+            let danoAAplicar = DadosMobsCards.Player[PersonagemEscolhido][state.cartaAtual].dano;
             let HpMonstro = CartasEmCampoStatus.IA[SlotNoTabuleiro].HP;
 
             CartasEmCampoStatus.IA[SlotNoTabuleiro].HP = HpMonstro - danoAAplicar;
@@ -92,7 +97,7 @@ export async function PlyerSkills(btn) {
             DivAcoes.classList.add('oculto');
             DivSkills.classList.remove('oculto');
 
-            (DadosMobsCards.Player[NomeCarta].skills || []).forEach(skillName => {
+            (DadosMobsCards.Player[PersonagemEscolhido][NomeCarta].skills || []).forEach(skillName => {
                 const divSkill = document.createElement('div');
                 divSkill.classList.add('btnsAcoes', 'textoUniversais');
                 divSkill.innerText = skillName;

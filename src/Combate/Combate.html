@@ -1,0 +1,67 @@
+<div id="TelaBatalha" class="tela oculto">
+		<!-- 1ª Linha: Perfil Inimigo -->
+		<div id="RowInimigo" class="">
+			<div id="BoxPerfilBot" class="">
+				<div id="IconBoxBot" class="imagemStyle"></div>
+				<div id="barHPBot" class="">HP: 100/100</div>
+			</div>
+
+			<div id="BoxCartasBot" class="">
+
+			</div>
+		</div>
+		<!-- 2ª Linha: Do meio, Tabuleiro -->
+		<div id="RowTabuleiro" class="">
+			<!-- Grid do Inimigo (Linha 1) -->
+			<div id="PosicoesEnemy" class="">
+				<div id="PosicaoT1" class="PosiçõesT"></div>
+				<div id="PosicaoT2" class="PosiçõesT"></div>
+				<div id="PosicaoT3" class="PosiçõesT"></div>
+				<div id="PosicaoT4" class="PosiçõesT"></div>
+				<div id="PosicaoT5" class="PosiçõesT"></div>
+				<div id="PosicaoT6" class="PosiçõesT"></div>
+				<div id="PosicaoT7" class="PosiçõesT"></div>
+				<div id="PosicaoT8" class="PosiçõesT"></div>
+				<div id="PosicaoT9" class="PosiçõesT"></div>
+			</div>
+
+			<!-- Barra Divisória (Linha 2) -->
+			<div id="danoFlutuante" class="oculto">5</div>
+			<div id="Bar"></div>
+
+			<!-- Grid do Aliado (Linha 3) -->
+			<div id="PosicoesAliado" class="">
+				<div id="PosicaoTP1" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP1')"></div>
+				<div id="PosicaoTP2" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP2')"></div>
+				<div id="PosicaoTP3" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP3')"></div>
+				<div id="PosicaoTP4" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP4')"></div>
+				<div id="PosicaoTP5" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP5')"></div>
+				<div id="PosicaoTP6" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP6')"></div>
+				<div id="PosicaoTP7" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP7')"></div>
+				<div id="PosicaoTP8" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP8')"></div>
+				<div id="PosicaoTP9" class="PosiçõesT" onclick="CardNoTabuleiro(this, 'PosicaoTP9')"></div>
+			</div>
+		</div>
+		<!-- 3ª Linha: Caixa de infos -->
+		<div id="BoxInfos" class="">
+			<div id="BoxEnergia" class="txt">4</div>
+			<div id="BoxTurno" class="txt">Turno: Player</div>
+			<div id="BtnEncerrarTurno" class="txt" onclick="EncerrarTurno()">Encerrar Turno</div>
+		</div>
+		<!-- 4ª Linha: Vida do jogador -->
+		<div id="BarHpPlayer">
+			<div id="BordaDaBarra"> 
+				<div id="TextHp">HP: 100 / 100</div>
+				<div id="PreenchimentoHP">
+				</div>
+			</div>
+		</div>
+		<!-- 5ª Linha: Mão do Player -->
+		<div id="RowPlayer" class="">
+			<div id="SlotC1" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC1')"></div>
+			<div id="SlotC2" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC2')"></div>
+			<div id="SlotC3" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC3')"></div>
+			<div id="SlotC4" class="CardsSlots imagemStyle" onclick="CardSelecionado('SlotC4')"></div>
+		</div>
+
+</div>

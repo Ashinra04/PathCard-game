@@ -1,0 +1,53 @@
+/*----------------------------------------
+TELA PRINCIPAL
+-------------------------------------------*/
+#TelaPrincipal {
+	width: 100%;
+	height: 100%;
+	background-color: #646464FF;
+	display: grid;
+	grid-template-rows: 5% 85% 10%;
+}
+
+#TopBar {
+	width: 100%;
+	height: 100%;
+	grid-row: 1;
+	background-color: #535353;
+	border-top: 2px solid lab(0% 0 0);
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: auto;
+}
+
+#fundoImg {
+	width: 100%;
+	height: 100%;
+	grid-row: 2;
+	background-image: url('/Imagens/Floor.png');
+	background-size: contain;
+}
+
+#Hotbar {
+	width: 100%;
+	height: 100%;
+	grid-row: 3;
+	background-color: #535353;
+	border-top: 2px solid lab(0% 0 0);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-auto-rows: auto;
+}
+
+.btnBar {
+	width: 100%;
+	height: 100%;
+	border-right: 1px solid black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btnBar:last-child {
+	border-right: none;
+}

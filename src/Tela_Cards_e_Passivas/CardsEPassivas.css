@@ -1,0 +1,115 @@
+/*----------------------------------------
+TELA SKILLS E CARTAS 
+-------------------------------------------*/
+#TelaSkillsEPassivas {
+	width: 100%;
+	height: 100%;
+	background-color: #000000;
+	display: grid;
+	grid-template-rows: 5% 21% 5% 62% 7%;
+}
+
+#BoxPassivas {
+	height: 100%;
+	background-color: gray;
+	padding: 2%;
+	gap: 1%;
+	grid-row: 2;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+.PassivasP {
+	height: 100%;
+	width: 100%;
+	background-color: hwb(206 36% 11% / 0.4235294117647059);
+}
+
+.Boxes {
+	height: 100%;
+	width: 100%;
+	font-size: clamp(16px, 4dvmax, 32px);
+	background-color: hwb(0 31% 67%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#BoxPassivasTitle {
+	grid-row: 1;
+}
+
+#BoxBaralhoTitle {
+	grid-row: 3;
+}
+
+#BoxBaralho {
+	height: 100%;
+	padding: 1%;
+	gap: 1.5%;
+	background-color: gray;
+	grid-row: 4;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-rows: auto;
+	box-sizing: border-box;
+}
+
+.Cards {
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 100% 0%);
+	background-size: contain;
+}
+
+#BoxBotoes {
+	height: 100%;
+	background-color: gray;
+	grid-row: 5;
+	display: grid;
+	grid-template-columns: 50% 50%;
+}
+
+#btnPersonagens {
+	grid-column: 1;
+}
+
+#btnGame {
+	grid-column: 2;
+}
+
+#PopUpskillaCards {
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 31% 67% / 0.8117647058823529);
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#PopUpSC {
+	height: 80%;
+	width: 90%;
+	border: 1.5px solid hwb(62 38% 3%);
+	display: grid;
+	grid-template-rows: 35% 65%;
+}
+
+#linhaSprites {
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 24% 36%);
+	grid-row: 1;
+}
+
+#linhaInfos {
+	height: 100%;
+	width: 100%;
+	background-color: hwb(0 72% 4%);
+	border-top: 1.5px solid hwb(62 38% 3%);
+	grid-row: 2;
+}

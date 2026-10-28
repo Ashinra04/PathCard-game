@@ -1,8 +1,18 @@
-// Combate.js
-import { CentralImagens, DadosMobsCards, CentralSkills, CartasEmCampoStatus, EfeitosTodosEmCampo } from './BancoDeImagens.js';
-import { PlyerAtacar, PlyerDefender, PlyerSkills, PlyerItems, PlyerStatus, controleEnergia } from './PlayerAcoes/PlayerAcoes.js';
+/*=========================================
+		 IMPORTS 
+==========================================*/
+import { IndicadorDanoPx } from './BancoDeImagens.js';
+import { CartasEmCampoStatus, EfeitosTodosEmCampo } from './ObjetosDeDados/CartasEmCampoSts.js';
+import { DadosMobsCards } from './ObjetosDeDados/BancoInfosCartas.js';
+import { CentralSkills } from './ObjetosDeDados/BancoDeSkills.js';
+import { CentralImagens } from './ObjetosDeDados/BancoDeimagens.js';
 import { state } from './VariaviesList/Variaveis.js';
+import { PlayerInfos } from '../PlayerInfos.js';
+import { PlyerAtacar, PlyerDefender, PlyerSkills, PlyerItems, PlyerStatus, controleEnergia } from './PlayerAcoes/PlayerAcoes.js';
 
+/*=========================================
+		 VARIAVEIS 
+==========================================*/
 let numero;
 let colocaremCampo = "nao";
 let CartaAserExcluida;
@@ -11,15 +21,12 @@ let abaAtivaPerfil = "doBot";
 let Turnos = 1;
 
 /*=========================================
-		 OBJETOS 
+		 OBJETOS e ARRAYS
 ==========================================*/
 window.DecksMobs = {
 	Goblins: ['GoblinGuerreiro', 'GoblinArcher', 'GoblinLancer', 'GoblinMage']
 };
-/*=========================================
-		 ARRAYS 
-==========================================*/
-window.cartasEMaos = ['Coelho', 'Sapo', 'Lobo', 'Morcego'];
+window.cartasEMaos = [];
 window.tabuleiroP = ['', '', '', '', '', '', '', '', ''];
 window.tabuleiroPE = [
 	['', '', ''],
@@ -54,11 +61,25 @@ window.AnimacaoAtacarPlyr = function (div) {
 		DivAnimar.style.animation = '';
 	}, 500);
 }
+window.IndicadorDeDanoM = function(Quem, Slot) {
+	let Pxtop; let Pxleft; let slotPx;
+	slotPx = `SLOT${Slot}`;
+	Pxleft = IndicadorDanoPx[Quem][slotPx].left;
+	Pxtop = IndicadorDanoPx[Quem][slotPx].top;
+	
+	let boxDano  = document.getElementById('danoFlutuante');
+	boxDano.style.left = `${Pxleft}%`;
+	boxDano.style.top = `${Pxtop}%`;
+	boxDano.classList.remove('oculto');
+}
+window.IndicadorDeDanoE = function() {
+	let boxDano  = document.getElementById('danoFlutuante');
+	boxDano.classList.add('oculto');
+}
 
 /*=========================================
 		 FUNÇÕES GERAIS
 ==========================================*/
-/* Funcoes focadas na montagem do baralho da Ia e das cartas em mao do player */
 window.AbrirPopPainel = function (PopCorpotamento) {
 	const POP = document.getElementById("PopPainelfundo");
 	const BtnAtacar = document.getElementById('BtnAtk');
@@ -130,7 +151,19 @@ window.MontarDeckEnimigo = function () {
 
 	AtualizarHPs();
 }
+window.AtualizarHPlayer = function(){
+	const PreenchimentoHP = document.getElementById('PreenchimentoHP');
 
+	const TextHP = document.getElementById('TextHp');
+	let vidaBase = PlayerInfos.HP;
+	let VidaMax = PlayerInfos.HPMax;
+	
+	TextHP.innerText = `HP: ${vidaBase} | ${VidaMax}`;
+	
+	let HPPorcentagem = (vidaBase / VidaMax) * 100;
+		
+	PreenchimentoHP.style.width = `${HPPorcentagem}%`;
+}
 window.AtualizarHPs = function () {
 	/* Função para atualizar os Hps de todos em campo */
 	/* Parte dos Mobs da Ia*/
@@ -289,12 +322,10 @@ window.CicloCartas = function () {
 		MaoPlayer.appendChild(divCard);
 	}
 };
-
-/* função CardNoTabuleiro, serve para colcar a carta em campo e apagar ela da mão do player */
 window.CardSelecionado = function (idCard) {
+	AtualizarHPlayer();
 	const AllCards = document.querySelectorAll('#RowPlayer .CardsSlots');
 	AllCards.forEach(card => card.classList.remove('CardSelecionado'));
-
 	const CardAtual = document.getElementById(idCard);
 	CartaAserExcluida = CardAtual;
 	if (cartaSelecionada == '' || cartaSelecionada !== idCard) {
@@ -316,10 +347,13 @@ window.CardSelecionado = function (idCard) {
 		cartaSelecionada = '';
 	}
 };
-
 window.CardNoTabuleiro = function (CardPosition, Idslot) {
 	let slotTabuleiro = CardPosition;
 
+	// PEGAR A CATEGORIA DA CARTA, INVOCAÇÃO, BUFF E DEBUFF
+	let NomedaCarta = cartasEMaos[numero];
+	let CategoriaDaCarta = DadosMobsCards.Player[PersonagemEscolhido][NomedaCarta].Categoria;
+	
 	/*passar a posicao da carta para a funcao atacarPlayer*/
 	state.CartaEscolhida = Idslot;
 
@@ -346,47 +380,53 @@ window.CardNoTabuleiro = function (CardPosition, Idslot) {
 
 	const CartasEmcampo = tabuleiroP.filter(slot => slot !== '').length;
 
-	if (colocaremCampo === "sim" && tabuleiroP[Verificar] == '') {
-		if (CartasEmcampo < 4) {
-			let numeroint = +numero;
-			let IdCardMao = cartasEMaos[numeroint];
-			let caminhoIMG = CentralImagens.ImagensSemFundo[IdCardMao];
-
-			let partes = Idslot.split("PosicaoTP");
-			let IdBoxTabuleiro = partes[1];
-			let indexPosition = +IdBoxTabuleiro - 1;
-			tabuleiroP[indexPosition] = IdCardMao;
-
-			let IDslot = Idslot;
-			let Identif = IdCardMao;
-			let HP = DadosMobsCards.Player[Identif].HPMax;
-
-			CartasEmCampoStatus.Player[IDslot] = {
-				nome: Identif,
-				HP: HP,
-				HPMax: HP,
-				Energia: 1
-			};
-
-			AtualizarHPs();
-
-			if (caminhoIMG) {
-				slotTabuleiro.style.backgroundImage = `url('${caminhoIMG}')`;
+	if (colocaremCampo === "sim") {
+		if(CategoriaDaCarta == 'Invocacao' && tabuleiroP[Verificar] == ''){
+			if (CartasEmcampo < 4) {
+				let numeroint = +numero;
+				let IdCardMao = cartasEMaos[numeroint];
+				let caminhoIMG = CentralImagens.ImagensSemFundo[IdCardMao];
+	
+				let partes = Idslot.split("PosicaoTP");
+				let IdBoxTabuleiro = partes[1];
+				let indexPosition = +IdBoxTabuleiro - 1;
+				tabuleiroP[indexPosition] = IdCardMao;
+	
+				let IDslot = Idslot;
+				let Identif = IdCardMao;
+				let HP = DadosMobsCards.Player[PersonagemEscolhido][Identif].HPMax;
+	
+				CartasEmCampoStatus.Player[IDslot] = {
+					nome: Identif,
+					HP: HP,
+					HPMax: HP,
+					Energia: 1
+				};
+	
+				AtualizarHPs();
+	
+				if (caminhoIMG) {
+					slotTabuleiro.style.backgroundImage = `url('${caminhoIMG}')`;
+				}
+	
+				slotTabuleiro.dataset.IdUnico = `Mob${indexPosition}`;
+	
+				const divaApagar = CartaAserExcluida;
+	
+				if (divaApagar) {
+					divaApagar.remove();
+					CartaAserExcluida = '';
+				}
+				cartaSelecionada = '';
+				colocaremCampo = "nao";
+			} else {
+				console.log("Limite atingido");
 			}
-
-			slotTabuleiro.dataset.IdUnico = `Mob${indexPosition}`;
-
-			const divaApagar = CartaAserExcluida;
-
-			if (divaApagar) {
-				divaApagar.remove();
-				CartaAserExcluida = '';
-			}
-			cartaSelecionada = '';
-			colocaremCampo = "nao";
-		} else {
-			console.log("Limite atingido");
+		} else if(CategoriaDaCarta !== 'Invocacao' && tabuleiroP[Verificar] !== '') 
+		{
+			alert(`Aplicar buff`)
 		}
+		
 	}
 	else if (colocaremCampo === "nao") {
 		let partes = Idslot.split("PosicaoTP");
@@ -487,6 +527,7 @@ window.VerificarTurnos = function (Vez) {
 }
 window.AcoesIA = async function () {
 	let VerifCartaPemCampo = 0;
+	let danoAplicar;
 	VerificarTurnos('IA');
 
 	tabuleiroP.forEach(nome => {
@@ -539,18 +580,19 @@ window.AcoesIA = async function () {
 				const numSortear = AlvosValidos.length;
 				let NRandom = Math.floor(Math.random() * numSortear);
 				let NumVerificado = AlvosValidos[NRandom];
-
 				let PPlayer = `PosicaoTP${NumVerificado}`;
 
+				IndicadorDeDanoM('PxPlayer', NumVerificado);
 				await new Promise(resolve => setTimeout(resolve, 300));
 				AnimacaoChacoalhar(PPlayer);
-
-				let danoAplicar = DadosMobsCards.IA[cartaAtualMob].dano;
+				
+				danoAplicar = DadosMobsCards.IA[cartaAtualMob].dano;
 				let HPlayer = CartasEmCampoStatus.Player[PPlayer].HP;
 
 				CartasEmCampoStatus.Player[PPlayer].HP = HPlayer - danoAplicar;
 				const DivT = document.getElementById(PPlayer);
-
+				
+				/* Codigo para quando o mob morrer */
 				if (CartasEmCampoStatus.Player[PPlayer].HP <= 0) {
 					CartasEmCampoStatus.Player[PPlayer].HP = 0;
 					CartasEmCampoStatus.Player[PPlayer].nome = '';
@@ -569,7 +611,9 @@ window.AcoesIA = async function () {
 					AtualizarHPs();
 				}
 
-				await new Promise(resolve => setTimeout(resolve, 1000));
+				await new Promise(resolve => setTimeout(resolve, 200));
+				IndicadorDeDanoE();
+				await new Promise(resolve => setTimeout(resolve, 800));
 			}
 		}
 	} else {
@@ -577,4 +621,10 @@ window.AcoesIA = async function () {
 	}
 
 	VerificarTurnos('Player');
+}
+window.VerificarEfeitos = function(){
+	for(let i = 0; i < 9; i++){
+		const MobAtual = `mob${i}`
+		console.log(EfeitosTodosEmCampo.Player[MobAtual]);
+	}
 }

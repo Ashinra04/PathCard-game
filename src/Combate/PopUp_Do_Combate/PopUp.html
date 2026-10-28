@@ -1,0 +1,87 @@
+<div id="PopPainelfundo" class="tela oculto">
+		<div id="PopPainel" class="">
+			<!-- 1 Parte que fica o perfil da cartas selecionada-->
+			<div id="PrimeiraRow" class="PopRows">
+				<div id="DivImagemEStatus">
+					<div id="BoxImg" class="imagemStyle"></div>
+					<div id="BoxImgSkill" class="imagemStyle oculto"></div>
+					
+					<div id="BoxStts">
+						<div id="RowNome" class="RowsStatus textoUniversais">NOME</div>
+						<div id="RowTipo" class="RowsStatus textoUniversais">TIPO</div>
+						
+						<!-- barra de HP -->
+						<div id="RowHP" class="RowsStatus textoUniversais">
+							<div id="hptext" class="textoUniversais">HP: 10/ 10</div>
+							<div id="hpbar">
+								<div id="hpfill"></div>
+							</div>
+						</div>
+						
+						<!-- barra de energia -->
+						<div id="RowEnergia" class="RowsStatus textoUniversais">
+							<div id="Energiatext" class="textoUniversais">Energia: 10/ 10</div>
+							<div id="energiabar">
+								<div id="energiafill"></div>
+							</div>
+						</div>
+						<div id="RowEfeitos" class="RowsStatus">
+							<!-- DoT da carta fica aqui -->
+							<div id="efeito1" class="BoxsEfeitos"></div>
+						</div>
+					</div>
+					<div id="BoxSttSkill" class="oculto">
+						
+					</div>
+				</div>
+
+			</div>
+			<!-- Div onde fica os botoes atacar, defender ... -->
+			<div id="DivAcoes">
+					<div id="BtnAtk" class="btnsAcoes textoUniversais" onclick="PlyerAtacar(this)">Atacar</div>
+					
+					<div id="BtnDef" class="btnsAcoes textoUniversais" onclick="PlyerDefender()">Defender</div>
+					
+					<div id="BtnSkills" class="btnsAcoes textoUniversais" onclick="PlyerSkills('btnSkills')">Habilidades</div>
+					
+					<div id="BtnItems" class="btnsAcoes textoUniversais" onclick="PlyerItems('BtnItems')">Items</div>
+					
+					<div id="BtnEfeitos" class="btnsAcoes textoUniversais" onclick="PlyerStatus('BtnEfeitos')">Efeitos</div>
+					
+					<div id="BtnExit" class="btnsAcoes textoUniversais" onclick="AbrirPopPainel('Esconder')">Fechar</div>
+			</div>
+			<div id="DivSkills" class="oculto">
+					<!-- divs de skills sendo 5 ao todo e 1 de btn voltar -->
+			</div>
+			<!-- pop onde fica os perfies de todos em campo -->
+			<div id="SegundaRow" class="PopRows">
+				<div id="DivTrocaPerfies">
+					<div id="trocaInimigo" class="DivsTrocar2" onclick="perfilEmCampo('doBot')"> <=MONTROS </div>
+					<div id="trocaPlayer" class="DivsTrocar" onclick="perfilEmCampo('doPlayer')"> PLAYER=> </div>
+				</div>
+				
+				<div id="DivPerfies">
+					<!-- DIVS boxPerfilMobs 1 a 6 -->
+						<!-- DIVS MobsIMG 1 a 6 -->
+						<!-- DIVS BarsName 1 a 6 -->
+						<!-- DIVS BarsHP 1 a 6 -->
+				</div>
+			</div>
+
+			<div id="DivItems" class="PopRows oculto">
+				<div id="BtnVoltarAcoes" class="btnsAcoes textoUniversais" onclick="PlyerItems('BtnVoltarAcoes')">Voltar</div>
+			</div>
+			
+			<div id="DivEfeitos" class="PopRows oculto">
+				<div id="BoxEfeitos" class="">
+					<div id="" class="divEfeitos">
+						<div id="" class="EfeitosIcon"></div>
+						<div id="" class="EfeitosDescricao"></div>
+					</div>
+				</div>
+				
+				<div id="BtnVoltarAcoes" class="btnsAcoes textoUniversais" onclick="PlyerStatus('BtnVoltarAcoes')">Voltar</div>
+			</div>
+			
+		</div> <!-- FECHAMENTO DIV DA BOX DO POP -->
+	</div> <!-- FECHAMENTO DIV DO FUNDO DO POP -->
